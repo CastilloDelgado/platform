@@ -59,6 +59,7 @@ return [
 
         'postmark' => [
             'transport' => 'postmark',
+            'token' => env('POSTMARK_TOKEN'),
             // 'message_stream_id' => null,
             // 'client' => [
             //     'timeout' => 5,

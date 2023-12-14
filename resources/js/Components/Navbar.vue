@@ -49,7 +49,7 @@ defineProps({
                 <div class="hidden sm:ml-6 sm:block">
                     <div v-if="canLogin" class="flex space-x-4">
                         <NavbarLink :href="route('welcome')" title="Inicio" :active="true" />
-                        <NavbarLink href="/" title="Blog" :active="false" />
+                        <NavbarLink :href="route('posts')" title="Blog" :active="false" />
                         <NavbarLink v-if="$page.props.auth.user" :href="route('dashboard')" title="Dashboard" />
                         <template v-else>
                             <NavbarLink :href="route('login')" title="Iniciar Sesión" />

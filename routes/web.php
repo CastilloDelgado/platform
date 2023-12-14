@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Post;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,24 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 })->name('welcome');
+
+Route::get('posts', function(){
+    return Inertia::render('Posts', [
+        'posts' => Post::all()
+    ]);
+})->name('posts');
+
+Route::get('categories/{category:slug}', function(Category $category){
+    return Inertia::render('Posts', [
+        'posts' => $category->posts
+    ]);
+})->name('categories');
+
+Route::get('posts/{post:slug}', function(Post $post){
+    return Inertia::render('Post', [
+        'post' => $post
+    ]);
+})->name('post');
 
 Route::middleware([
     'auth:sanctum',

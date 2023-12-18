@@ -15,9 +15,10 @@ defineProps({
             <div class=" max-w-xl">
                 <p class="font-bold text-2xl">{{ post.title }}</p>
                 <div class="flex justify-center text-xs gap-1 mb-4">
-                    <Link href="#" class="underline">Create by Marco</Link>
+                    <p>Create by</p>
+                    <Link :href="route('authors', post.user.username)" class="underline">{{ post.user.name }}</Link>
                     <p>for</p>
-                    <Link :href="route('categories', post.category.slug)" class=" underline">{{ post.category.name }}</Link>
+                    <Link :href="route('categories', post.category.slug)" class="capitalize underline">{{ post.category.name }}</Link>
                 </div>
                 <p>{{ post.body }}</p>
             </div>

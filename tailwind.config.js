@@ -15,8 +15,9 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-            },
+                'serif': ['Libre Baskerville', 'serif'],
+                'sans': ['Almarai', 'sans-serif'],
+            }
         },
     },
 

@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Category;
 
 /*
@@ -28,7 +29,7 @@ Route::get('/', function () {
 
 Route::get('posts', function(){
     return Inertia::render('Posts', [
-        'posts' => Post::all()
+        'posts' => Post::latest()->get()
     ]);
 })->name('posts');
 
@@ -37,6 +38,12 @@ Route::get('categories/{category:slug}', function(Category $category){
         'posts' => $category->posts
     ]);
 })->name('categories');
+
+Route::get('authors/{user:username}', function(User $user){
+    return Inertia::render('Posts', [
+        'posts' => $user->posts
+    ]);
+})->name('authors');
 
 Route::get('posts/{post:slug}', function(Post $post){
     return Inertia::render('Post', [

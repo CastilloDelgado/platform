@@ -16,8 +16,11 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+        $word = $this->faker->word;
+        
         return [
-            //
+            "name" => $word,
+            "slug" => $word
         ];
     }
 }

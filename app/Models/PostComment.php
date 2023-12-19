@@ -11,6 +11,8 @@ class PostComment extends Model
 
     protected $with = ['user'];
 
+    protected $guarded = [];
+
 
     public function Post()
     {

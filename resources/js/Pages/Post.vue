@@ -66,7 +66,7 @@ defineProps({
                     </div>
 
 
-                    <PostCommentsSection :comments="post.comments" />
+                    <PostCommentsSection :post-id="post.id" :comments="post.comments" />
                 </div>
             </article>
         </main>

@@ -13,10 +13,6 @@ defineProps({
 
 <template>
     <div class="flex items-center justify-between border-non py-3 ">
-        <!-- <div class="flex flex-1 justify-between sm:hidden">
-            <a href="#" class="relative inline-flex items-center border dark:border-white bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
-            <a href="#" class="relative ml-3 inline-flex items-center border dark:border-white bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
-        </div> -->
         <div class="flex flex-col md:flex-row sm:flex-1 sm:items-center sm:justify-between">
             <div>
             <p class="text-sm dark:text-white mb-2">

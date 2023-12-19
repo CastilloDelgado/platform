@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\PostComment;
 use App\Models\Category;
+use App\Http\Controllers\PostCommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +68,8 @@ Route::get('posts/{post:slug}', function(Post $post){
         'post' => $post
     ]);
 })->name('post');
+
+Route::post('posts/{post:id}/comments', [PostCommentController::class, 'store'])->name('post.comment.store');
 
 Route::middleware([
     'auth:sanctum',

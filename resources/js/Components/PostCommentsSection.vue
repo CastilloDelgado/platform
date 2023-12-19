@@ -1,8 +1,13 @@
 <script setup>
 import PostCommentBadge from './PostCommentBadge.vue';
+import PostCommentForm from './PostCommentForm.vue';
 
 defineProps({
-    comments: Array
+    postId: {
+        type: Number,
+        required: true
+    },
+    comments: Array,
 })
 </script>
 
@@ -10,7 +15,8 @@ defineProps({
     <div class="mt-6">
         <p class="font-bold text-lg mb-4">Comentarios</p>
         <div class="space-y-4">
-           <PostCommentBadge v-for="comment in comments" :comment="comment" />
+            <PostCommentForm :post-id="postId" />
+            <PostCommentBadge v-for="comment in comments" :comment="comment" />
         </div>
     </div>
 </template>

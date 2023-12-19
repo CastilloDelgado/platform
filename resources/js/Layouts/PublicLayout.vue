@@ -1,6 +1,7 @@
 <script setup>
 import Footer from '@/Components/Footer.vue';
 import Navbar from '@/Components/Navbar.vue';
+import Snow from '@/Components/Snow.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -9,6 +10,7 @@ defineProps({
 </script>
 
 <template>
+    <Snow />
     <section class="dark:bg-white">
 
         <Navbar :canLogin="canLogin" :canRegister="canRegister" />

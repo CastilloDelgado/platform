@@ -22,7 +22,9 @@ Route::get('/', function () {
 
     $posts =  Post::query()
         ->when(Request::input('search'), function($query, $search){
-            $query->where('title', 'like', "%{$search}%");
+            $query
+                ->where('title', 'like', "%{$search}%")
+                ->orWhere('body', 'like', "%{$search}%");
         })
         ->paginate(9)
         ->withQueryString();
@@ -59,6 +61,7 @@ Route::get('authors/{user:username}', function(User $user){
 })->name('authors');
 
 Route::get('posts/{post:slug}', function(Post $post){
+    $post->comments;
     return Inertia::render('Post', [
         'post' => $post
     ]);

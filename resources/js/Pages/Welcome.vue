@@ -19,6 +19,9 @@ defineProps({
     categories: {
         type: Array,
         required: true
+    },
+    filters: {
+        type: Object
     }
 });
 </script>
@@ -31,7 +34,7 @@ defineProps({
             <div class="max-w-6xl mx-auto p-6 lg:p-8">
                 <WelcomeMessage />
 
-                <SearchTools :categories="categories" />
+                <SearchTools :categories="categories" :filters="filters" />
 
                <PostsGrid :posts="posts" />
             </div>

@@ -19,18 +19,24 @@ use App\Models\Category;
 */
 
 Route::get('/', function () {
+
+    $posts =  Post::query()
+        ->when(Request::input('search'), function($query, $search){
+            $query->where('title', 'like', "%{$search}%");
+        })
+        ->paginate(9)
+        ->withQueryString();
+
+    // $posts = Post::paginate(6);
+
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'posts' => 
-            Post::query()
-                ->when(Request::input('search'), function($query, $search){
-                    $query->where('title', 'like', "%{$search}%");
-                })
-                ->get(),
-        'categories' => Category::all()
+        'posts' => $posts,
+        'categories' => Category::all(),
+        'filters' => Request::only(['search'])
     ]);
 })->name('welcome');
 

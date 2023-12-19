@@ -5,14 +5,18 @@ import { ref, watch } from 'vue';
 import { router } from '@inertiajs/vue3';
 import throttle from "lodash/throttle"
 
-const search = ref('')
 
-defineProps({
+const props = defineProps({
     categories: {
         type: Array,
         required: true
+    },
+    filters: {
+        type: Object
     }
 })
+
+const search = ref(props.filters.search)
 
 watch(search, throttle(value => {
     router.get('/', {

@@ -13,7 +13,7 @@ defineProps({
 </script>
 
 <template>
-    <article class="border border-black dark:border-white flex flex-col">
+    <article class="border border-black dark:border-white flex flex-col ">
         <div>
             <img src="/images/illustration-1.png" alt="Blog Post illustration" class="">
         </div>

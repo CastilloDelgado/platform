@@ -9,11 +9,10 @@
 .intro,
 .intro a{
   color:#fff;
-  font-family:
 }
 /* customizable snowflake styling */
 .snowflake {
-  color: #fff;
+  color: #ffffff;
   font-size: 1em;
   font-family: Arial;
   text-shadow: 0 0 1px #000;

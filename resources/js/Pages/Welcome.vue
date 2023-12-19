@@ -1,15 +1,25 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import Navbar from "@/Components/Navbar.vue"
 import WelcomeMessage from "@/Components/WelcomeMessage.vue"
-import Footer from "@/Components/Footer.vue"
 import PublicLayout from '@/Layouts/PublicLayout.vue';
+import SearchTools from "@/Components/SearchTools.vue"
+import LargePostBadge from '@/Components/LargePostBadge.vue';
+import PostBadge from '@/Components/PostBadge.vue';
+import PostsGrid from '@/Components/PostsGrid.vue';
 
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
     laravelVersion: String,
     phpVersion: String,
+    posts: {
+        type: Array,
+        required: true
+    },
+    categories: {
+        type: Array,
+        required: true
+    }
 });
 </script>
 
@@ -20,6 +30,10 @@ defineProps({
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-center bg-white  dark:bg-black selection:bg-red-500 selection:text-white">
             <div class="max-w-6xl mx-auto p-6 lg:p-8">
                 <WelcomeMessage />
+
+                <SearchTools :categories="categories" />
+
+               <PostsGrid :posts="posts" />
             </div>
         </div>
     </PublicLayout>

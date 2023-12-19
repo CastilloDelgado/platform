@@ -24,6 +24,13 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'posts' => 
+            Post::query()
+                ->when(Request::input('search'), function($query, $search){
+                    $query->where('title', 'like', "%{$search}%");
+                })
+                ->get(),
+        'categories' => Category::all()
     ]);
 })->name('welcome');
 

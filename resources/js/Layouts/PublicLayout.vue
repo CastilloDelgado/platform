@@ -9,14 +9,16 @@ defineProps({
 </script>
 
 <template>
+    <section class="dark:bg-white">
 
-    <Navbar :canLogin="canLogin" :canRegister="canRegister" />
-
-    <div class="min-h-[80vh] bg-white dark:bg-black">
-
-        <slot  />
+        <Navbar :canLogin="canLogin" :canRegister="canRegister" />
         
-    </div>
+        <div class="min-h-[80vh] bg-white dark:bg-black space-y-6">
 
-    <Footer />
+                <slot  />
+                
+        </div>
+        
+        <Footer />
+    </section>
 </template>

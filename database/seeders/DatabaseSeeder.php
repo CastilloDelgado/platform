@@ -3,10 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Factories\PostCommentFactory;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostComment;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +22,6 @@ class DatabaseSeeder extends Seeder
         // PostComment::truncate();
         // Post::truncate();
 
-        Post::factory(10)->create();
+        PostComment::factory(10)->create();
     }
 }

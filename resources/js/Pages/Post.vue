@@ -16,7 +16,7 @@ defineProps({
         <main class="max-w-6xl mx-auto space-y-6 text-black dark:text-white pt-12 px-4 md:px-0 pb-12">
             <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
                 <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
-                    <img src="/images/illustration-1.png" alt="">
+                    <img :src="post.thumbnail_url" alt="Blog Post illustration" class="">
 
                     <p class="mt-4 block text-gray-400 text-xs">
                         Published <time>{{ post.created_at }}</time>

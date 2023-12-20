@@ -15,7 +15,7 @@ defineProps({
 <template>
     <article class="border border-black dark:border-white flex flex-col ">
         <div>
-            <img src="/images/illustration-1.png" alt="Blog Post illustration" class="">
+            <img :src="post.thumbnail_url" alt="Blog Post illustration" class="">
         </div>
 
         <div class="p-6 bg-white flex flex-col justify-between h-full">

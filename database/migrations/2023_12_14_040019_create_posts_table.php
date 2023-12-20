@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('excerpt');
             $table->text('body');
+            $table->text('thumbnail_url');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

@@ -30,9 +30,10 @@ defineProps({
                 <Link 
                     v-for="(link, index) in paginatorInfo.links" 
                     :href="link.url" 
-                    class="relative inline-flex items-center px-4 py-2 text-sm font-semibold dark:text-white border-white dark:hover:bg-white dark:hover:text-black border" 
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-semibold  border-white dark:hover:bg-white dark:hover:text-black border" 
                     :class="{
                         'dark:bg-white dark:text-black': link.active,
+                        'dark:text-white': !link.active
                     }"
                     preserve-scroll
                 >

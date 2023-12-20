@@ -19,7 +19,7 @@ defineProps({
         class="border border-black dark:border-white">
         <div class="lg:flex">
             <div class="flex-1">
-                <img src="/images/illustration-1.png" alt="Blog Post illustration" class="object-fill w-full h-full">
+                <img :src="post.thumbnail_url" alt="Blog Post illustration" class="object-fill w-full h-full">
             </div>
 
             <div class="flex-1 flex flex-col justify-between p-6 bg-white">

@@ -31,7 +31,7 @@ watch(search, throttle(value => {
 </script>
 
 <template>
-    <div class="w-full flex justify-center flex-wrap gap-x-2 space-y-2 lg:space-y-0 lg:space-x-4 mt-8 mb-6">
+    <div class="w-full flex justify-center flex-wrap gap-x-2 space-y-2 lg:space-y-0 lg:space-x-4">
         <!--  Category -->
         <SelectDropdown :list="categories" />
 

@@ -25,7 +25,8 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence,
             'excerpt' => $this->faker->sentence,
             'body' => $this->faker->paragraph,
-            'slug' => $this->faker->slug
+            'slug' => $this->faker->slug,
+            'thumbnail_url' => 'thumbnails/tLyWZ6vXKVnSWptuDHyqVP1OZW6M5fx1Cf6j0vx4.png'
         ];
     }
 }

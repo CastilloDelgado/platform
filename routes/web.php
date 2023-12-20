@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\PostComment;
 use App\Models\Category;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCommentController;
 
 /*
@@ -20,9 +20,16 @@ use App\Http\Controllers\PostCommentController;
 |
 */
 
-Route::get('/', function () {
+Route::get('dashboard', [PostController::class, 'index'])->name('dashboard');
+Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('posts/store', [PostController::class, 'store'])->name('posts.store');
+Route::delete('posts/{post:id}', [PostController::class, 'delete'])->name('posts.delete');
 
+Route::post('posts/{post:id}/comments', [PostCommentController::class, 'store'])->name('post.comment.store');
+
+Route::get('/', function () {
     $posts =  Post::query()
+        ->latest()
         ->when(Request::input('search'), function($query, $search){
             $query
                 ->where('title', 'like', "%{$search}%")
@@ -30,8 +37,6 @@ Route::get('/', function () {
         })
         ->paginate(9)
         ->withQueryString();
-
-    // $posts = Post::paginate(6);
 
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -69,14 +74,8 @@ Route::get('posts/{post:slug}', function(Post $post){
     ]);
 })->name('post');
 
-Route::post('posts/{post:id}/comments', [PostCommentController::class, 'store'])->name('post.comment.store');
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-});
+])->group(function () {});

@@ -19,6 +19,13 @@ class PostController extends Controller
         ]);
     }
 
+    public function show (Post $post){
+        $post->comments;
+        $post->images;
+        return Inertia::render('Post', [
+            'post' => $post
+        ]);
+    }
 
     public function create()
     {
@@ -27,8 +34,17 @@ class PostController extends Controller
         ]);
     }
 
+    public function edit(Post $post){
+        $post->images;
+        return Inertia::render('EditPost', [
+            'post'=> $post,
+            'categories' => Category::all(),
+        ]);
+    }
+
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'title'=> ['required','string','max:255'],
             'slug'=> ['required','string','max:255'],
@@ -42,7 +58,17 @@ class PostController extends Controller
 
         $validated['thumbnail_url'] = $mainImagePath;
 
-        auth()->user()->posts()->create($validated);
+        $post = auth()->user()->posts()->create($validated);
+
+        // Saving images
+
+        $imageFiles = $request->file('images');  
+        $imageUrls = [];
+
+        foreach($imageFiles as $imageFile){
+            $imageUrl = $imageFile->store('post-images');
+            $post->images()->create(['image_url' => $imageUrl]);
+        }   
 
         return redirect(route('dashboard'));
     }

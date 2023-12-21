@@ -1,12 +1,17 @@
 <script setup>
 import CategoryBadge from '@/Components/CategoryBadge.vue';
+import ImageCarousel from '@/Components/ImageCarousel.vue';
 import PostCommentsSection from '@/Components/PostCommentsSection.vue';
 import PublicLayout from '@/Layouts/PublicLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 
-defineProps({
+const props = defineProps({
     post: Object
 })
+
+const imagesPreview = computed(() => props.post.images.length > 0 ? props.post.images.map(image => image.image_url) : [])
 
 </script>
 
@@ -18,15 +23,15 @@ defineProps({
                 <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
                     <img :src="post.thumbnail_url" alt="Blog Post illustration" class="">
 
-                    <p class="mt-4 block text-gray-400 text-xs">
-                        Published <time>{{ post.created_at }}</time>
+                    <p class="mt-4 text-left block text-gray-400 text-sm">
+                        Published <time>{{ formatDistance(new Date(post.created_at), new Date(), { addSuffix: true }) }}</time>
                     </p>
 
-                    <div class="flex items-center lg:justify-center text-sm mt-4">
+                    <div class="flex justify-start text-sm mt-4">
                         <img src="/images/lary-avatar.svg" alt="Lary avatar">
                         <div class="ml-3 text-left">
                             <h5 class="font-bold">{{ post.user.name }}</h5>
-                            <h6>Joined {{ post.user.created_at }}</h6>
+                            <h6 class="dark:text-white/50">Joined {{ formatDistance(new Date(post.user.created_at), new Date(), { addSuffix: true }) }}</h6>
                         </div>
                     </div>
                 </div>
@@ -65,6 +70,7 @@ defineProps({
                         <p class="text-xl">{{ post.body }}</p>
                     </div>
 
+                    <ImageCarousel :images="imagesPreview" />
 
                     <PostCommentsSection :post-id="post.id" :comments="post.comments" />
                 </div>

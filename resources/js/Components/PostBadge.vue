@@ -2,6 +2,7 @@
 import { Link } from '@inertiajs/vue3';
 import CategoryBadge from './CategoryBadge.vue';
 import PrimaryButton from './PrimaryButton.vue';
+import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 
 defineProps({
     post: {
@@ -13,12 +14,12 @@ defineProps({
 </script>
 
 <template>
-    <article class="border border-black dark:border-white flex flex-col ">
+    <Link :href="route('posts.show', post.slug)" as="article" class="border border-black dark:border-white flex flex-col">
         <div>
-            <img :src="post.thumbnail_url" alt="Blog Post illustration" class="">
+            <img :src="post.thumbnail_url" alt="Blog Post illustration" class="h-64 w-full object-cover">
         </div>
 
-        <div class="p-6 bg-white flex flex-col justify-between h-full">
+        <div class="p-6 bg-white dark:bg-black text-black dark:text-white flex flex-col justify-between h-full">
             <header>
                 <div class="space-x-2">
                     <CategoryBadge>{{ post.category.name }}</CategoryBadge>
@@ -30,7 +31,7 @@ defineProps({
                     </h1>
 
                     <span class="mt-2 block text-gray-400 text-xs">
-                        Published <time>{{ post.created_at }}</time>
+                        Published <time>{{ formatDistance(new Date(post.created_at), new Date(), { addSuffix: true }) }}</time>
                     </span>
                 </div>
             </header>
@@ -46,16 +47,16 @@ defineProps({
                     <img src="/images/lary-avatar.svg" alt="Lary avatar">
                     <div class="ml-3">
                         <h5 class="font-bold">{{ post.user.name }}</h5>
+                        <p class="text-xs">Joined {{ formatDistance(new Date(post.user.created_at), new Date(), { addSuffix: true }) }}</p>
                     </div>
                 </div>
 
                 <div>
-                    <Link :href="route('post', post.slug)">
+                    <Link :href="route('posts.show', post.slug)">
                         <PrimaryButton>Leer más</PrimaryButton>
                     </Link>
                 </div>
             </footer>
         </div>
-
-    </article>
+    </Link>
 </template>

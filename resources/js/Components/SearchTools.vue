@@ -33,14 +33,14 @@ watch(search, throttle(value => {
 <template>
     <div class="w-full flex justify-center flex-wrap gap-x-2 space-y-2 lg:space-y-0 lg:space-x-4">
         <!--  Category -->
-        <SelectDropdown :list="categories" />
+        <!-- <SelectDropdown :list="categories" /> -->
 
         <!-- Search -->
         <div class="relative flex lg:inline-flex items-center">
             <form method="GET" action="#">
                 <!-- <input type="text" name="search" placeholder="Find something"
                         class="bg-transparent placeholder-black font-semibold text-sm"> -->
-                <TextInput v-model="search" placeholder="Buscar por palabra clave" />
+                <TextInput v-model="search" placeholder="Buscar por palabra clave" class="text-center"/>
             </form>
         </div>
     </div>

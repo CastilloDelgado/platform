@@ -1,19 +1,16 @@
 <template>
     <div>
-        <div v-for="element in [1,2,3,4,5,6,7,8,9]" class="snowflake">❅</div>
+        <div v-for="element in [1,2,3,4,5,6,7,8,9]" class="snowflake text-black dark:text-white">❅</div>
     </div>
 </template>
 
 <style scoped>
 
 .intro,
-.intro a{
-  color:#fff;
-}
+
 /* customizable snowflake styling */
 .snowflake {
-  color: #ffffff;
-  font-size: 1em;
+  font-size: 1.2em;
   font-family: Arial;
   text-shadow: 0 0 1px #000;
 }
@@ -22,7 +19,6 @@
 /* Demo Purpose Only*/
 .demo {
   font-family: 'Raleway', sans-serif;
-	color:#fff;
     display: block;
     margin: 0 auto;
     padding: 15px 0;
@@ -30,6 +26,5 @@
 }
 .demo a{
   font-family: 'Raleway', sans-serif;
-color: #000;		
 }
 </style>

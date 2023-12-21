@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,10 +29,15 @@ class Post extends Model
         return $this->hasMany(PostComment::class, 'post_id');
     }
 
+    public function images()
+    {
+        return $this->hasMany(PostImage::class, 'post_id');
+    }
+
     public function thumbnailUrl(): Attribute
     {
         return Attribute::make(
-            get: fn(string $thumbnail_ur) => asset('storage/'. $thumbnail_ur)
+            get: fn(string $thumbnail_url) => asset('storage/'. $thumbnail_url)
         );
     }
 }

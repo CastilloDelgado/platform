@@ -19,6 +19,8 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
+        "@vueuse/core": "^10.7.0",
+        "date-fns": "^3.0.1",
         "lodash": "^4.17.21",
         "swiper": "^11.0.5"
     }

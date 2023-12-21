@@ -54,7 +54,7 @@ defineProps({
                     </div>
 
                     <div class="hidden lg:block">
-                        <Link :href="route('post', post.slug)">
+                        <Link :href="route('posts.show', post.slug)">
                             <PrimaryButton>Leer más</PrimaryButton>
                         </Link>
                     </div>

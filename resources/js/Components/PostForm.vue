@@ -1,15 +1,23 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import InputError from './InputError.vue';
 import InputLabel from './InputLabel.vue';
 import PrimaryButton from './PrimaryButton.vue';
 import TextInput from './TextInput.vue';
 import { useForm } from '@inertiajs/vue3';
+import ImageCarousel from './ImageCarousel.vue';
 
-defineProps({
+const props = defineProps({
     categories: {
         type: Array,
         required: true
+    },
+    editing: {
+        type: Boolean,
+        default: false
+    },
+    post: {
+        type: Object,
     }
 });
 
@@ -23,17 +31,78 @@ const form = useForm({
     images: []
 })
 
-const submitForm = () => form.post('/posts/store')
+const thumbnailUpdated = ref(false)
+const thumbnailPreview = ref('')
 
-const handleMainImageChange = (event) => form.thumbnail_url = event.target.files[0]
+const submitForm = () => {
+    if(props.editing){
+        form.patch('/posts/update')
+    } else {
+        form.post('/posts/store')
+    }
+}
 
-const thumbnailPreview = computed(() => form.thumbnail_url ? URL.createObjectURL(form.thumbnail_url) : '')
+const resetForm = () => {
+    form.reset()
+    thumbnailUpdated.value = false
+}
+
+const handleThumbnailChange = (event) => {
+    form.thumbnail_url = event.target.files[0]
+    if(props.editing){
+        thumbnailUpdated.value = true
+    }
+}
+
+const handelImagesChange = (event) => form.images = event.target.files
+
+watch(
+    form, 
+    (newForm) => {
+        console.log("executing")
+        if(props.editing){
+            if(thumbnailUpdated.value){
+                thumbnailPreview.value = newForm.thumbnail_url? URL.createObjectURL(newForm.thumbnail_url) : ''
+            } else {
+                thumbnailPreview.value = newForm.thumbnail_url
+            }
+        } else {   
+            thumbnailPreview.value = newForm.thumbnail_url ? URL.createObjectURL(newForm.thumbnail_url) : ''
+        }
+    },
+    {
+        immediate: true
+    }
+)
+
+const imagesPreview = computed(() => {
+    if(props.editing){
+        return props.post.images.map((image) => image.image_url)
+    }
+
+    return Array.from(form.images).length > 0 ? Array.from(form.images).map(image => URL.createObjectURL(image)) : []
+})
+
+onMounted(() => {
+    if(props.editing){
+        form.defaults({
+            title:  props.post.title,
+            slug:  props.post.slug,
+            excerpt:  props.post.excerpt,
+            body:  props.post.body,
+            category_id:  props.post.category_id,
+            thumbnail_url: props.post.thumbnail_url
+        })
+
+        form.reset()
+    }
+})
 
 </script>
 
 <template>
     <div class="pt-2 pb-12">
-        <form @submit.prevent="submitForm" class="max-w-lg mx-auto space-y-2">
+        <form @reset.prevent="resetForm" @submit.prevent="submitForm" class="max-w-lg mx-auto space-y-2">
             <p class="font-serif font-bold text-xl text-center px-12">Completa el formulario para publicar un nuevo post!</p>
             <div class="">
                 <InputLabel for="title" value="Titulo" />
@@ -72,13 +141,13 @@ const thumbnailPreview = computed(() => form.thumbnail_url ? URL.createObjectURL
                 <div class="flex flex-row w-full">
                     <div>
                         <input  
-                        id="thumbnail_url"
-                        @change="handleMainImageChange"
-                        type="file"
-                        class="mt-1 block w-full"
-                        required
-                        autofocus
-                        autocomplete="Slug"
+                            id="thumbnail_url"
+                            @change="handleThumbnailChange"
+                            type="file"
+                            class="mt-1 block w-full"
+                            required
+                            autofocus
+                            autocomplete="Slug"
                         />
                     </div>
                     <div class="w-full justify-center">
@@ -92,22 +161,21 @@ const thumbnailPreview = computed(() => form.thumbnail_url ? URL.createObjectURL
 
             <!-- Images -->
             <div class="">
-                <InputLabel for="thumbnail_url" value="Thumbnail" />
-                <div class="flex flex-row w-full">
-                    <div>
+                <InputLabel for="thumbnail_url" value="Galería de Imagenes" />
+                <div class="flex flex-col w-full">
+                    <div class="mb-2">
                         <input  
                             id="thumbnail_url"
-                            @change="handleMainImageChange"
+                            @change="handelImagesChange"
                             type="file"
                             class="mt-1 block w-full"
                             required
                             autofocus
-                            autocomplete="Slug"
                             multiple
                         />
                     </div>
                     <div class="w-full justify-center">
-                        <img :src="thumbnailPreview" class="w-64"/>
+                       <ImageCarousel :images="imagesPreview" />
                     </div>
                 </div>
                 <div v-show="form.errors.thumbnail_url" class="flex justify-end">
@@ -160,8 +228,9 @@ const thumbnailPreview = computed(() => form.thumbnail_url ? URL.createObjectURL
                     <InputError :message="form.errors.category_id" />
                 </div>
             </div>
-            <div class="pt-6">
-                <PrimaryButton class="w-full">Publicar</PrimaryButton>
+            <div class="pt-6 flex gap-2">
+                <PrimaryButton v-if="editing" class="w-full" type="reset" @click="form.reset()">Cancelar cambios</PrimaryButton>
+                <PrimaryButton type="submit" class="w-full">{{ editing ? "Editar post" : "Publicar Post"}}</PrimaryButton>
             </div>
         </form>
     </div> 

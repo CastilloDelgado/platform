@@ -5,6 +5,7 @@ import NavbarLink from "./NavbarLink.vue";
 import ProfileIconButton from "./ProfileIconButton.vue";
 import NavbarButton from "./NavbarButton.vue";
 import DropdownLink from "./DropdownLink.vue";
+import ThemeSwitch from "./ThemeSwitch.vue"
 
 const profileMenuIsOpen = ref(false)
 const linkMenuIsOpen = ref(false)
@@ -16,7 +17,7 @@ defineProps({
 </script>
 
 <template>
-    <nav class="bg-white dark:bg-black sticky top-0 z-10 border-b border-black dark:border-white">
+    <nav class="bg-white dark:bg-black sticky top-0 z-10 border-b border-black dark:border-white text-black">
         <div class="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -46,11 +47,15 @@ defineProps({
                 <div class="flex flex-shrink-0 items-center">
                     <LogoIcon />
                 </div>
+                
                 <div class="hidden sm:ml-6 sm:block">
                     <div v-if="canLogin" class="flex space-x-4">
                         <NavbarLink :href="route('welcome')" title="Inicio" :active="true" />
-                        <NavbarLink :href="route('posts')" title="Blog" :active="false" />
+
                         <NavbarLink v-if="$page.props.auth.user" :href="route('dashboard')" title="Dashboard" />
+
+                        
+
                         <template v-else>
                             <NavbarLink :href="route('login')" title="Iniciar Sesión" />
                             <NavbarLink v-if="canRegister" :href="route('register')" title="Registrate" />
@@ -58,9 +63,11 @@ defineProps({
                     </div>
                     <div v-else>
                         <NavbarLink href="/" title="Inicio" :active="true" />
-                        <NavbarLink href="/" title="Blog" :active="false" />
                     </div>
                 </div>
+            </div>
+            <div class="mx-3 pt-2">
+                <ThemeSwitch />
             </div>
             <div v-if="$page.props.auth.user" class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0" >
                 <!-- Profile dropdown -->
@@ -68,17 +75,6 @@ defineProps({
                     <div>
                         <ProfileIconButton @click="() => profileMenuIsOpen = !profileMenuIsOpen" />
                     </div>
-
-                <!--
-                    Dropdown menu, show/hide based on menu state.
-
-                    Entering: "transition ease-out duration-100"
-                    From: "transform opacity-0 scale-95"
-                    To: "transform opacity-100 scale-100"
-                    Leaving: "transition ease-in duration-75"
-                    From: "transform opacity-100 scale-100"
-                    To: "transform opacity-0 scale-95"
-                -->
                     <div 
                         :class="{
                             'hidden': !profileMenuIsOpen,
@@ -87,7 +83,7 @@ defineProps({
                         class="absolute right-[-4px] z-10 mt-2 w-48 origin-top-right border border-black bg-white dark:border-white dark:bg-black py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                         <!-- Active: "bg-gray-100", Not Active: "" -->
                         <DropdownLink :href="route('profile.show')">
-                            Tu perfil
+                            Mi perfil
                         </DropdownLink>
                         <DropdownLink :href="route('profile.show')">
                             Configuración

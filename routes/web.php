@@ -22,9 +22,10 @@ use App\Http\Controllers\PostCommentController;
 
 Route::get('dashboard', [PostController::class, 'index'])->name('dashboard');
 Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+Route::get('posts/{post:slug}/edit', [PostController::class,'edit'])->name('posts.edit');
 Route::post('posts/store', [PostController::class, 'store'])->name('posts.store');
 Route::delete('posts/{post:id}', [PostController::class, 'delete'])->name('posts.delete');
-
 Route::post('posts/{post:id}/comments', [PostCommentController::class, 'store'])->name('post.comment.store');
 
 Route::get('/', function () {
@@ -66,13 +67,6 @@ Route::get('authors/{user:username}', function(User $user){
         'posts' => $user->posts
     ]);
 })->name('authors');
-
-Route::get('posts/{post:slug}', function(Post $post){
-    $post->comments;
-    return Inertia::render('Post', [
-        'post' => $post
-    ]);
-})->name('post');
 
 Route::middleware([
     'auth:sanctum',

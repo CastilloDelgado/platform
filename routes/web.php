@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,6 +28,10 @@ Route::get('posts/{post:slug}/edit', [PostController::class,'edit'])->name('post
 Route::post('posts/store', [PostController::class, 'store'])->name('posts.store');
 Route::delete('posts/{post:id}', [PostController::class, 'delete'])->name('posts.delete');
 Route::post('posts/{post:id}/comments', [PostCommentController::class, 'store'])->name('post.comment.store');
+
+Route::get('/auth/redirect', [AuthController::class,'redirect'])->name('auth.redirect');
+Route::get('/auth/callback', [AuthController::class,'callback'])->name('auth.callback');
+Route::get('/auth/logout', [AuthController::class,'logout'])->name('auth.logout');
 
 Route::get('/', function () {
     $posts =  Post::query()
@@ -68,8 +73,8 @@ Route::get('authors/{user:username}', function(User $user){
     ]);
 })->name('authors');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified',
+// ])->group(function () {});

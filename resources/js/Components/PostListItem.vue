@@ -28,13 +28,13 @@ const deletePost = () => {
             <div class="min-w-0 flex-auto">
                 <p class="text-lg font-semibold leading-6 dark:text-white">{{post.title }}</p>
                 <p class="mt-1 truncate text-xs leading-5 mb-2">{{ formatDistance(new Date(post.created_at), new Date(), { addSuffix: true }) }}</p>
-                <p class="mt-1 truncate leading-5">{{ post.excerpt }}</p>
+                <p class="mt-1 truncate leading-5 font-semibold">{{ post.excerpt }}</p>
             </div>
         </div>
         <div class="flex gap-2">
-            <Link :href="route('posts.edit', post.slug)">
+            <!-- <Link :href="route('posts.edit', post.slug)">
                 <PrimaryButton>Editar</PrimaryButton>
-            </Link>
+            </Link> -->
             <DangerButton @click="deletePost">Eliminar</DangerButton>
         </div>
     </li>

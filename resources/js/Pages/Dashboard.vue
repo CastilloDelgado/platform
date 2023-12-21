@@ -8,22 +8,24 @@ defineProps({
     posts: {
         type: Object,
         required: true
-    }
+    },
+    canLogin: Boolean,
+    canRegister: Boolean,
 })
 
 </script>
 
 <template>
-    <AppLayout title="Dashboard">
+    <AppLayout title="Dashboard" :canLogin="canLogin" :canRegister="canRegister">
         <template #header>
-            <h2 class="font-semibold text-xl dark:text-white dark:bg-black leading-tight">
+            <h2 class="font-semibold text-xl dark:text-white dark:bg-black">
                 Dashboard
             </h2>
         </template>
 
         <div class="">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-12">
-                <div class="dark:bg-black dark:border-white border overflow-hidden dark:text-white px-6 py-4">
+                <div class=" overflow-hidden text-black dark:text-white">
                     <div class="w-full flex justify-between gap-4 ">
                         <div class="grid place-content-center">
                             <p class="text-2xl font-bold font-serif">Mis Posts</p>

@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Post;
+use Illuminate\Support\Facades\Route;
 
 class PostController extends Controller
 {
@@ -15,7 +16,9 @@ class PostController extends Controller
         $posts = Post::where('user_id', $user_id)->paginate(10);
 
         return Inertia::render('Dashboard', [
-            'posts' => $posts
+            'posts' => $posts,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
         ]);
     }
 
@@ -23,7 +26,9 @@ class PostController extends Controller
         $post->comments;
         $post->images;
         return Inertia::render('Post', [
-            'post' => $post
+            'post' => $post,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
         ]);
     }
 
@@ -44,7 +49,6 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-
         $validated = $request->validate([
             'title'=> ['required','string','max:255'],
             'slug'=> ['required','string','max:255'],

@@ -29,7 +29,7 @@ const sadFace = ref(createSadFace())
     <template v-else>
         <div class="text-center py-12 flex flex-col space-y-6">
             <p class="text-4xl">{{ sadFace }}</p>
-            <p class="text-white text-md text-center">No has creado ningún post (aún...)</p>
+            <p class="text-black dark:text-white text-md text-center">No has creado ningún post (aún...)</p>
             <Link :href="route('posts.create')">
                 <PrimaryButton>Crea un post aquí!</PrimaryButton>
                 </Link>

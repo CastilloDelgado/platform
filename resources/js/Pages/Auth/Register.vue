@@ -106,7 +106,14 @@ const submit = () => {
                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Register
                 </PrimaryButton>
+
+
             </div>
         </form>
+        <div class="flex items-center justify-end mt-4">
+            <a :href="route('auth.redirect')" class="w-full">
+                <PrimaryButton class="w-full">GMAIL</PrimaryButton>
+            </a>
+        </div>
     </AuthenticationCard>
 </template>

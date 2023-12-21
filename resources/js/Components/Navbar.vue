@@ -6,6 +6,7 @@ import ProfileIconButton from "./ProfileIconButton.vue";
 import NavbarButton from "./NavbarButton.vue";
 import DropdownLink from "./DropdownLink.vue";
 import ThemeSwitch from "./ThemeSwitch.vue"
+import { router } from "@inertiajs/vue3";
 
 const profileMenuIsOpen = ref(false)
 const linkMenuIsOpen = ref(false)
@@ -14,6 +15,8 @@ defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
 });
+
+const logout = () => router.get('/auth/logout')
 </script>
 
 <template>
@@ -51,23 +54,19 @@ defineProps({
                 <div class="hidden sm:ml-6 sm:block">
                     <div v-if="canLogin" class="flex space-x-4">
                         <NavbarLink :href="route('welcome')" title="Inicio" :active="true" />
-
                         <NavbarLink v-if="$page.props.auth.user" :href="route('dashboard')" title="Dashboard" />
-
-                        
-
                         <template v-else>
                             <NavbarLink :href="route('login')" title="Iniciar Sesión" />
                             <NavbarLink v-if="canRegister" :href="route('register')" title="Registrate" />
                         </template>
                     </div>
-                    <div v-else>
+                    <div v-else class="flex space-x-4">
                         <NavbarLink href="/" title="Inicio" :active="true" />
                     </div>
                 </div>
             </div>
-            <div class="mx-3 pt-2">
-                <ThemeSwitch />
+            <div class="ml-4 pt-1">
+                <ThemeSwitch class="hidden md:block" />
             </div>
             <div v-if="$page.props.auth.user" class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0" >
                 <!-- Profile dropdown -->
@@ -85,12 +84,10 @@ defineProps({
                         <DropdownLink :href="route('profile.show')">
                             Mi perfil
                         </DropdownLink>
-                        <DropdownLink :href="route('profile.show')">
-                            Configuración
-                        </DropdownLink>
-                        <DropdownLink :href="route('profile.show')" class="text-red-500">
+
+                        <button @click="logout" class="block w-full px-4 py-2 text-start text-sm leading-5 text-red-500 hover:bg-red-500 hover:text-black  dark:hover:bg-red-500 dark:hover:text-white ">
                             Cerrar Sesión
-                        </DropdownLink>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -107,15 +104,14 @@ defineProps({
         >
             <div class="space-y-1 px-2 pb-3 pt-2">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <template v-if="canLogin" class="flex space-x-4">
-                <NavbarButton title="Inicio" :active="true" :href="route('welcome')" />
-                <NavbarButton title="Blog" :active="false" :href="route('welcome')" />
-                    <NavbarButton v-if="$page.props.auth.user" :href="route('dashboard')" title="Dashboard" />
+                <div v-if="canLogin" class="flex space-x-4">
+                    <NavbarLink :href="route('welcome')" title="Inicio" :active="true" />
+                    <NavbarLink v-if="$page.props.auth.user" :href="route('dashboard')" title="Dashboard" />
                     <template v-else>
-                        <NavbarButton :href="route('login')" title="Iniciar Sesión" />
-                        <NavbarButton v-if="canRegister" :href="route('register')" title="Registrate" />
+                        <NavbarLink :href="route('login')" title="Iniciar Sesión" />
+                        <NavbarLink v-if="canRegister" :href="route('register')" title="Registrate" />
                     </template>
-                </template>
+                </div>
                 <template v-else>
                     <NavbarButton title="Inicio" :active="false" :href="route('welcome')" />
                     <NavbarButton title="Blog" :active="false" :href="route('welcome')" />
@@ -124,3 +120,4 @@ defineProps({
         </div>
     </nav>
 </template>
+

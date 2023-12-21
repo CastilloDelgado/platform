@@ -8,7 +8,9 @@ import { computed } from 'vue';
 import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 
 const props = defineProps({
-    post: Object
+    post: Object,
+    canLogin: Boolean,
+    canRegister: Boolean,
 })
 
 const imagesPreview = computed(() => props.post.images.length > 0 ? props.post.images.map(image => image.image_url) : [])
@@ -16,12 +18,12 @@ const imagesPreview = computed(() => props.post.images.length > 0 ? props.post.i
 </script>
 
 <template>
-    <PublicLayout>
+    <PublicLayout  :canLogin="canLogin" :canRegister="canRegister">
         <Head :title="post.title" />
         <main class="max-w-6xl mx-auto space-y-6 text-black dark:text-white pt-12 px-4 md:px-0 pb-12">
             <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
                 <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
-                    <img :src="post.thumbnail_url" alt="Blog Post illustration" class="">
+                    <img :src="post.thumbnail_url" alt="Blog Post illustration"  class="border border-black dark:border-white">
 
                     <p class="mt-4 text-left block text-gray-400 text-sm">
                         Published <time>{{ formatDistance(new Date(post.created_at), new Date(), { addSuffix: true }) }}</time>
@@ -60,17 +62,22 @@ const imagesPreview = computed(() => props.post.images.length > 0 ? props.post.i
                         </div>
                     </div>
 
-                    <h1 class="font-bold text-3xl lg:text-4xl mb-10 font-serif">
+                    <h1 class="font-bold text-3xl mb-1 lg:text-4xl font-serif">
                         {{ post.title }}
                     </h1>
+                    <p class="mb-6">
+                        Created {{ formatDistance(new Date(post.created_at), new Date(), { addSuffix: true }) }}
+                    </p>
 
                     <div class="space-y-4 lg:text-lg leading-loose">
-                        <p class="text-2xl">{{ post.excerpt }}</p>
+                        <p class="text-2xl text-justify">{{ post.excerpt }}</p>
 
-                        <p class="text-xl">{{ post.body }}</p>
+                        <p class="text-xl text-justify">{{ post.body }}</p>
                     </div>
 
-                    <ImageCarousel :images="imagesPreview" />
+                    <div class="my-6">
+                        <ImageCarousel :images="imagesPreview" />
+                    </div>
 
                     <PostCommentsSection :post-id="post.id" :comments="post.comments" />
                 </div>

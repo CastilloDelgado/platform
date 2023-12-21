@@ -86,5 +86,10 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
+        <div class="flex items-center justify-end mt-4">
+            <a :href="route('auth.redirect')" class="w-full">
+                <PrimaryButton class="w-full">GMAIL</PrimaryButton>
+            </a>
+        </div>
     </AuthenticationCard>
 </template>

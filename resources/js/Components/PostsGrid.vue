@@ -18,7 +18,7 @@ const sadFace = ref(createSadFace())
 </script>
 
 <template>
-    <div class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-3 gap-3">
+    <div class="max-w-6xl mx-auto mt-6 lg:mt-8 space-y-3 gap-3">
         <template v-if="posts.data.length > 0">
             <template v-if="firstThreeHighlighted">
                 <LargePostBadge :post="posts.data[0]" />

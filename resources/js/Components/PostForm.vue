@@ -105,7 +105,7 @@ onMounted(() => {
         <form @reset.prevent="resetForm" @submit.prevent="submitForm" class="max-w-lg mx-auto space-y-2">
             <p class="font-serif font-bold text-xl text-center px-12">Completa el formulario para publicar un nuevo post!</p>
             <div class="">
-                <InputLabel for="title" value="Titulo" />
+                <InputLabel for="title" value="Título" />
                 <TextInput  
                     id="title"
                     v-model="form.title"
@@ -113,7 +113,7 @@ onMounted(() => {
                     class="mt-1 block w-full"
                     required
                     autofocus
-                    autocomplete="Titulo"
+                    placeholder="El titulo de tu post es lo más importante"
                 />
                 <div v-show="form.errors.title" class="flex justify-end">
                     <InputError :message="form.errors.title" />
@@ -128,7 +128,7 @@ onMounted(() => {
                     class="mt-1 block w-full"
                     required
                     autofocus
-                    autocomplete="Slug"
+                    placeholder="Este campo se autocompleta con el título"
                 />
                 <div v-show="form.errors.slug" class="flex justify-end">
                     <InputError :message="form.errors.slug" />
@@ -147,7 +147,6 @@ onMounted(() => {
                             class="mt-1 block w-full"
                             required
                             autofocus
-                            autocomplete="Slug"
                         />
                     </div>
                     <div class="w-full justify-center">
@@ -192,7 +191,7 @@ onMounted(() => {
                     required
                     rows="4"
                     autofocus
-                    autocomplete="Titulo"
+                    placeholder="Aquí va un extracto de tu post, esto va debajo del thumbnail de tu post en la página principal"
                 />
                 <div v-show="form.errors.excerpt" class="flex justify-end">
                     <InputError :message="form.errors.excerpt" />
@@ -208,7 +207,7 @@ onMounted(() => {
                     required
                     rows="12"
                     autofocus
-                    autocomplete="Titulo"
+                    placeholder="Este es el espacio para que cuentes todo sobre tu experiencia!"
                 />
                 <div v-show="form.errors.body" class="flex justify-end">
                     <InputError :message="form.errors.body" />

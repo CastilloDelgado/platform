@@ -12,7 +12,9 @@
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^4.1",
         "laravel/sanctum": "^3.3",
+        "laravel/socialite": "^5.11",
         "laravel/tinker": "^2.8",
+        "socialiteproviders/google": "^4.1",
         "symfony/http-client": "^7.0",
         "symfony/postmark-mailer": "^7.0",
         "tightenco/ziggy": "^1.0"

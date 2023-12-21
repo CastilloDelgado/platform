@@ -14,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-    <Link :href="route('posts.show', post.slug)" as="article" class="border border-black dark:border-white flex flex-col">
+    <Link :href="route('posts.show', post.slug)" as="article" class="border border-black dark:border-white flex flex-col cursor-pointer">
         <div>
             <img :src="post.thumbnail_url" alt="Blog Post illustration" class="h-64 w-full object-cover">
         </div>

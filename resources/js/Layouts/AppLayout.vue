@@ -28,17 +28,18 @@ const logout = () => {
 
 <template>
     <div>
+
         <Head :title="title" />
 
         <Banner />
 
         <div class="min-h-screen bg-white dark:bg-black">
-            
-            <Navbar  :canLogin="canLogin" :canRegister="canRegister" />
+
+            <Navbar :canLogin="canLogin" :canRegister="canRegister" />
 
             <!-- Page Heading -->
             <header v-if="$slots.header" class="bg-white dark:bg-black">
-                <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
             </header>

@@ -45,7 +45,8 @@ defineProps({
 
         <footer class="flex justify-between items-center mt-8">
             <div class="flex items-center text-sm">
-                <img :src="post.user.profile_photo_url" alt="Lary avatar">
+                <img :src="post.user.profile_photo_url" class="w-12 h-12 object-cover border border-black dark:border-white"
+                    alt="Lary avatar">
                 <div class="ml-3">
                     <h5 class="font-bold">{{ post.user.name }}</h5>
                     <p class="text-xs">Joined {{ formatDistance(new Date(post.user.created_at), new Date(), {

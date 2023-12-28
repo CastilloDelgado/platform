@@ -15,8 +15,7 @@ defineProps({
 </script>
 
 <template>
-    <article
-        class="border border-black dark:border-white">
+    <article class="border border-black dark:border-white">
         <div class="lg:flex">
             <div class="flex-1">
                 <img :src="post.thumbnail_url" alt="Blog Post illustration" class="object-fill w-full h-full">
@@ -47,7 +46,7 @@ defineProps({
 
                 <footer class="flex justify-between items-center mt-8">
                     <div class="flex items-center text-sm">
-                        <img src="/images/lary-avatar.svg" alt="Lary avatar">
+                        <img :src="post.user.profile_photo_url" alt="Lary avatar">
                         <div class="ml-3">
                             <h5 class="font-bold">{{ post.user.name }}</h5>
                         </div>
@@ -55,7 +54,7 @@ defineProps({
 
                     <div class="hidden lg:block">
                         <Link :href="route('posts.show', post.slug)">
-                            <PrimaryButton>Leer más</PrimaryButton>
+                        <PrimaryButton>Leer más</PrimaryButton>
                         </Link>
                     </div>
                 </footer>

@@ -29,15 +29,15 @@ const imagesPreview = computed(() => props.post.images.length > 0 ? props.post.i
 
                     <p class="mt-4 text-left block text-gray-400 text-sm">
                         Published <time>{{ formatDistance(new Date(post.created_at), new Date(), { addSuffix: true })
-                                                    }}</time>
+                        }}</time>
                     </p>
 
                     <div class="flex justify-start text-sm mt-4">
-                        <img src="/images/lary-avatar.svg" alt="Lary avatar">
+                        <img :src="post.user.profile_photo_url" alt="Lary avatar">
                         <div class="ml-3 text-left">
                             <h5 class="font-bold">{{ post.user.name }}</h5>
                             <h6 class="dark:text-white/50">Joined {{ formatDistance(new Date(post.user.created_at), new
-                                                            Date(), { addSuffix: true }) }}</h6>
+                                Date(), { addSuffix: true }) }}</h6>
                         </div>
                     </div>
                 </div>
@@ -86,5 +86,6 @@ const imagesPreview = computed(() => props.post.images.length > 0 ? props.post.i
                     <PostCommentsSection :post-id="post.id" :comments="post.comments" />
                 </div>
             </article>
-    </main>
-</PublicLayout></template>
+        </main>
+    </PublicLayout>
+</template>

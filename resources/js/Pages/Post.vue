@@ -15,6 +15,8 @@ const props = defineProps({
 
 const imagesPreview = computed(() => props.post.images.length > 0 ? props.post.images.map(image => image.image_url) : [])
 
+const bodySplitted = computed(() => props.post.body.split('\n'))
+
 </script>
 
 <template>
@@ -76,7 +78,8 @@ const imagesPreview = computed(() => props.post.images.length > 0 ? props.post.i
                     <div class="space-y-4 lg:text-lg leading-loose">
                         <p class="text-2xl text-justify">{{ post.excerpt }}</p>
 
-                        <p class="text-xl text-justify">{{ post.body }}</p>
+                        <!-- <p class="text-xl text-justify">{{ post.body }}</p> -->
+                        <p class="text-xl text-justify" v-for="paragraph in bodySplitted">{{ paragraph }}</p>
                     </div>
 
                     <div class="my-6">

@@ -53,7 +53,7 @@ const submit = () => {
                 {{ status }}
             </div>
 
-            <form @submit.prevent="submit">
+            <!-- <form @submit.prevent="submit">
                 <div>
                     <InputLabel for="email" value="Email" />
                     <TextInput id="email" v-model="form.email" type="email" class="mt-1 block w-full" required autofocus
@@ -85,10 +85,10 @@ const submit = () => {
                         Log in
                     </PrimaryButton>
                 </div>
-            </form>
+            </form> -->
             <div class="flex items-center justify-end mt-4">
                 <a :href="route('auth.redirect')" class="w-full">
-                    <PrimaryButton class="w-full">GMAIL</PrimaryButton>
+                    <PrimaryButton class="w-full">Entra con GMAIL</PrimaryButton>
                 </a>
             </div>
         </AuthenticationCard>

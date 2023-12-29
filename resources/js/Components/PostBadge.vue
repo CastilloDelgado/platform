@@ -38,7 +38,7 @@ defineProps({
         </header>
 
         <div class="text-sm mt-4">
-            <p>
+            <p class="text-justify">
                 {{ post.excerpt }}
             </p>
         </div>

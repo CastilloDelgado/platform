@@ -77,8 +77,6 @@ const bodySplitted = computed(() => props.post.body.split('\n'))
 
                     <div class="space-y-4 lg:text-lg leading-loose">
                         <p class="text-2xl text-justify">{{ post.excerpt }}</p>
-
-                        <!-- <p class="text-xl text-justify">{{ post.body }}</p> -->
                         <p class="text-xl text-justify" v-for="paragraph in bodySplitted">{{ paragraph }}</p>
                     </div>
 

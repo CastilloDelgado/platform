@@ -35,7 +35,8 @@ const bodySplitted = computed(() => props.post.body.split('\n'))
                     </p>
 
                     <div class="flex justify-start text-sm mt-4">
-                        <img :src="post.user.profile_photo_url" alt="Lary avatar" class="w-24 h-24 object">
+                        <img :src="post.user.profile_photo_url" alt="Lary avatar"
+                            class="w-24 h-24 object-cover border dark:border-white border-black">
                         <div class="ml-3 text-left">
                             <h5 class="font-bold">{{ post.user.name }}</h5>
                             <h6 class="dark:text-white/50">Joined {{ formatDistance(new Date(post.user.created_at), new

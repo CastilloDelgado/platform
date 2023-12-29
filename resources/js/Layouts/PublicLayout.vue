@@ -14,13 +14,13 @@ defineProps({
     <section class="dark:bg-white">
 
         <Navbar :canLogin="canLogin" :canRegister="canRegister" />
-        
-        <div class="min-h-[80vh] bg-white dark:bg-black space-y-6">
 
-                <slot  />
-                
+        <div class="min-h-[70vh] bg-white dark:bg-black space-y-6">
+
+            <slot />
+
         </div>
-        
+
         <Footer />
     </section>
 </template>

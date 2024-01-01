@@ -36,24 +36,26 @@ const submit = () => {
 
         <Head title="Log in" />
 
-        <AuthenticationCard>
-            <template #logo>
-                <div class="pt-6 pb-6 text-black dark:text-white max-w-xl">
-                    <div class="flex mb-6 text-center justify-center">
-                        <p class="text-4xl font-bold font-serif mr-2">Life & Live Music</p>
-                        <p class="text-md">[blog]</p>
+        <div class="min-h-[80vh] grid place-content-center">
+
+            <AuthenticationCard>
+                <template #logo>
+                    <div class="pb-6 text-black dark:text-white max-w-xl">
+                        <div class="flex mb-6 text-center justify-center">
+                            <p class="text-4xl font-bold font-serif mr-2">Life & Live Music</p>
+                            <p class="text-md">[blog]</p>
+                        </div>
+                        <div class="text-xl flex text-center justify-center">
+                            <p>Fotos <b>horribles</b> y <b>buenas</b> historias de momentos <b>innolvidables</b>. </p>
+                        </div>
                     </div>
-                    <div class="text-xl flex text-center justify-center">
-                        <p>Fotos <b>horribles</b> y <b>buenas</b> historias de momentos <b>innolvidables</b>. </p>
-                    </div>
+                </template>
+
+                <div v-if="status" class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+                    {{ status }}
                 </div>
-            </template>
 
-            <div v-if="status" class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-                {{ status }}
-            </div>
-
-            <!-- <form @submit.prevent="submit">
+                <!-- <form @submit.prevent="submit">
                 <div>
                     <InputLabel for="email" value="Email" />
                     <TextInput id="email" v-model="form.email" type="email" class="mt-1 block w-full" required autofocus
@@ -86,11 +88,12 @@ const submit = () => {
                     </PrimaryButton>
                 </div>
             </form> -->
-            <div class="flex items-center justify-end mt-4">
-                <a :href="route('auth.redirect')" class="w-full">
-                    <PrimaryButton class="w-full">Entra con GMAIL</PrimaryButton>
-                </a>
-            </div>
-        </AuthenticationCard>
+                <div class="flex items-center justify-end mt-4">
+                    <a :href="route('auth.redirect')" class="w-full">
+                        <PrimaryButton class="w-full">Entra con GMAIL</PrimaryButton>
+                    </a>
+                </div>
+            </AuthenticationCard>
+        </div>
     </PublicLayout>
 </template>

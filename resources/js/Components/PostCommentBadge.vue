@@ -8,7 +8,8 @@ defineProps({
 
 <template>
     <div class="flex flex-row">
-        <img :src="post.user.profile_photo_url" alt="Lary avatar" class="w-12 h-12">
+        <img :src="comment.user.profile_photo_url" alt="Lary avatar"
+            class="w-12 h-12 border border-black dark:border-white">
         <div class="ml-2">
             <div class="flex flex-col mb-3">
                 <h5 class="font-bold">{{ comment.user.name }}</h5>

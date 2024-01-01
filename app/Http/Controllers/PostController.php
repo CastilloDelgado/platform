@@ -25,6 +25,7 @@ class PostController extends Controller
     public function show (Post $post){
         $post->comments;
         $post->images;
+        $post->user;
         return Inertia::render('Post', [
             'post' => $post,
             'canLogin' => Route::has('login'),

@@ -30,20 +30,21 @@ const submit = () => {
 
         <Head title="Register" />
 
-        <AuthenticationCard>
-            <template #logo>
-                <div class="pt-6 pb-6 text-black dark:text-white max-w-xl">
-                    <div class="flex mb-6 text-center justify-center">
-                        <p class="text-4xl font-bold font-serif mr-2">Life & Live Music</p>
-                        <p class="text-md">[blog]</p>
+        <div class="w-full min-h-[80vh] grid place-content-center">
+            <AuthenticationCard>
+                <template #logo>
+                    <div class="pt-6 pb-6 text-black dark:text-white max-w-xl">
+                        <div class="flex mb-6 text-center justify-center">
+                            <p class="text-4xl font-bold font-serif mr-2">Life & Live Music</p>
+                            <p class="text-md">[blog]</p>
+                        </div>
+                        <div class="text-xl flex text-center justify-center">
+                            <p>Fotos <b>horribles</b> y <b>buenas</b> historias de momentos <b>innolvidables</b>. </p>
+                        </div>
                     </div>
-                    <div class="text-xl flex text-center justify-center">
-                        <p>Fotos <b>horribles</b> y <b>buenas</b> historias de momentos <b>innolvidables</b>. </p>
-                    </div>
-                </div>
-            </template>
+                </template>
 
-            <!-- <form @submit.prevent="submit">
+                <!-- <form @submit.prevent="submit">
                 <div>
                     <InputLabel for="name" value="Name" />
                     <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full" required autofocus
@@ -102,11 +103,12 @@ const submit = () => {
 
                 </div>
             </form> -->
-            <div class="flex items-center justify-end mt-4">
-                <a :href="route('auth.redirect')" class="w-full">
-                    <PrimaryButton class="w-full">Registrate con GMAIL</PrimaryButton>
-                </a>
-            </div>
-        </AuthenticationCard>
+                <div class="flex items-center justify-end mt-4">
+                    <a :href="route('auth.redirect')" class="w-full">
+                        <PrimaryButton class="w-full">Registrate con GMAIL</PrimaryButton>
+                    </a>
+                </div>
+            </AuthenticationCard>
+        </div>
     </PublicLayout>
 </template>

@@ -5,7 +5,7 @@ import { Link } from '@inertiajs/vue3';
 <template>
     <div class="bg-black dark:bg-white w-full py-6 border-t border-white">
         <div class="mx-auto max-w-7xl text-white  dark:text-black text-center">
-            <Link>
+            <Link href="/">
             <div class="flex justify-center">
                 <p class="text-2xl font-bold font-serif mr-1">Life & Live Music</p>
                 <p class="text-sm">[blog]</p>

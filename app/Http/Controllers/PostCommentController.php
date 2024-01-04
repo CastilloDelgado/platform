@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PostComment;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -20,4 +21,10 @@ class PostCommentController extends Controller
 
         return back();
     }
+
+    public function delete(PostComment $postComment, Request $request){
+        $post = $postComment->post;
+        $postComment->delete();
+        return redirect(route('posts.show', $post));
+    }   
 }

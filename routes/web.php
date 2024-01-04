@@ -21,13 +21,14 @@ use App\Http\Controllers\PostCommentController;
 |
 */
 
-Route::get('dashboard', [PostController::class, 'index'])->name('dashboard');
 Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 Route::get('posts/{post:slug}/edit', [PostController::class,'edit'])->name('posts.edit');
 Route::post('posts/store', [PostController::class, 'store'])->name('posts.store');
 Route::delete('posts/{post:id}', [PostController::class, 'delete'])->name('posts.delete');
 Route::post('posts/{post:id}/comments', [PostCommentController::class, 'store'])->name('post.comment.store');
+
+Route::delete('posts/post-comment/{postComment:id}', [PostCommentController::class,'delete'])->name('post-comments.delete');
 
 Route::get('/auth/redirect', [AuthController::class,'redirect'])->name('auth.redirect');
 Route::get('/auth/callback', [AuthController::class,'callback'])->name('auth.callback');
@@ -73,8 +74,10 @@ Route::get('authors/{user:username}', function(User $user){
     ]);
 })->name('authors');
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified',
-// ])->group(function () {});
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('dashboard', [PostController::class, 'index'])->name('dashboard');
+});

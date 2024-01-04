@@ -44,7 +44,7 @@ const submit = () => {
                     </div>
                 </template>
 
-                <form @submit.prevent="submit">
+                <!-- <form @submit.prevent="submit">
                     <div>
                         <InputLabel for="name" value="Name" />
                         <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full" required autofocus
@@ -103,7 +103,7 @@ const submit = () => {
 
 
                     </div>
-                </form>
+                </form> -->
                 <div class="flex items-center justify-end mt-4">
                     <a :href="route('auth.redirect')" class="w-full">
                         <PrimaryButton class="w-full">Registrate con GMAIL</PrimaryButton>

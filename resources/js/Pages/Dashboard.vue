@@ -24,7 +24,7 @@ defineProps({
         </template>
 
         <div class="">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pb-12">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 pb-12">
                 <div class=" overflow-hidden text-black dark:text-white">
                     <div class="w-full flex justify-between gap-4 ">
                         <div class="grid place-content-center">

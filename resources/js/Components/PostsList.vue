@@ -20,7 +20,7 @@ const sadFace = ref(createSadFace())
 </script>
 
 <template>
-    <template  v-if="posts?.data?.length > 0">
+    <template v-if="posts?.data?.length > 0">
         <ul role="list" class="divide-y divide-gray-100">
             <PostListItem v-for="post in posts.data" :post="post" />
         </ul>
@@ -31,8 +31,8 @@ const sadFace = ref(createSadFace())
             <p class="text-4xl">{{ sadFace }}</p>
             <p class="text-black dark:text-white text-md text-center">No has creado ningún post (aún...)</p>
             <Link :href="route('posts.create')">
-                <PrimaryButton>Crea un post aquí!</PrimaryButton>
-                </Link>
+            <PrimaryButton>Crea un post aquí!</PrimaryButton>
+            </Link>
         </div>
     </template>
 </template>

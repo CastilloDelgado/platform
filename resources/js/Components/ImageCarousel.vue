@@ -13,12 +13,10 @@ defineProps({
 </script>
 
 <template>
-    <Swiper class="border dark:border-white border-black">
-        <SwiperSlide v-for="image in images" class="">
-            <div class="w-full flex justify-center " >
-                <div class="w-fit">
-                    <img :src="image" class="max-h-[65vh]" />
-                </div>
+    <Swiper class="border dark:border-white border-black h-[70vh]">
+        <SwiperSlide v-for="image in images">
+            <div class="grid place-content-center">
+                <img :src="image" class="object-contain h-[70vh]" />
             </div>
         </SwiperSlide>
     </Swiper>

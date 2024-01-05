@@ -31,7 +31,7 @@ defineProps({
                             <p class="text-2xl font-bold font-serif">Mis Posts</p>
                         </div>
                         <Link :href="route('posts.create')">
-                        <PrimaryButton class="w-64">Crear un post</PrimaryButton>
+                        <PrimaryButton class="w-32 md:w-64">Crear un post</PrimaryButton>
                         </Link>
                     </div>
                     <PostsList :posts="posts" />

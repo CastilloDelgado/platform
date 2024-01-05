@@ -25,7 +25,7 @@ const deletePost = () => {
             <div class="w-full md:w-1/5 flex justify-center">
                 <Link :href="route('posts.show', post.slug)">
                 <img :src="post.thumbnail_url" alt=""
-                    class="w-40 md:w-32 mb-2 h-auto object-fit border border-black dark:border-white ">
+                    class="w-40 md:w-32 h-auto object-fit border border-black dark:border-white mb-6 md:mb-0 ">
                 </Link>
             </div>
             <div class="w-full md:w-4/5">

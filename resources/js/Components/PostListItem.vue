@@ -20,9 +20,9 @@ const deletePost = () => {
 </script>
 
 <template>
-    <li class="flex justify-between gap-x-6 py-5 flex-col md:flex-row border-b border-black dark:border-white">
+    <li class="flex justify-around gap-x-6 py-5 flex-col md:flex-row border-b border-black dark:border-white">
         <div class="flex flex-col md:flex-row min-w-0 gap-x-4">
-            <div class="w-full md:w-1/5 flex justify-center">
+            <div class="flex justify-start">
                 <Link :href="route('posts.show', post.slug)">
                 <img :src="post.thumbnail_url" alt=""
                     class="w-40 md:w-32 h-auto object-fit border border-black dark:border-white mb-6 md:mb-0 ">
@@ -39,7 +39,7 @@ const deletePost = () => {
                 </div>
             </div>
         </div>
-        <div class="flex gap-2 mt-2 justify-between ">
+        <div class="flex gap-2 mt-3 md:mt-0 justify-between ">
             <div>
                 <div class="text-center border border-black dark:border-white px-2 py-1">
                     <p class="font-bold text-sm">Views</p>

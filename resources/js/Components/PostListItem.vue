@@ -38,7 +38,13 @@ const deletePost = () => {
                 </div>
             </div>
         </div>
-        <div class="flex gap-2 mt-2 justify-end">
+        <div class="flex gap-4 mt-2 justify-between ">
+            <div>
+                <div class="text-center border border-black dark:border-white px-2 py-1">
+                    <p class="font-bold text-sm">Views</p>
+                    <p class="font-serif text-sm">{{ post.views || 0 }}</p>
+                </div>
+            </div>
             <!-- <Link :href="route('posts.edit', post.slug)">
                 <PrimaryButton>Editar</PrimaryButton>
             </Link> -->

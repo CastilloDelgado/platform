@@ -30,7 +30,8 @@ const deletePost = () => {
             </div>
             <div class="w-full md:w-4/5">
                 <p class="text-xl font-semibold leading-6 dark:text-white font-serif">{{ post.title }}</p>
-                <p class="mt-1 truncate text-xs leading-5 mb-2">{{ formatDistance(new Date(post.created_at), new Date(), {
+                <p class="mt-1 truncate text-xs leading-5 mb-2 capitalize">{{ formatDistance(new Date(post.created_at), new
+                    Date(), {
                     addSuffix: true
                 }) }}</p>
                 <div>
@@ -38,11 +39,11 @@ const deletePost = () => {
                 </div>
             </div>
         </div>
-        <div class="flex gap-4 mt-2 justify-between ">
+        <div class="flex gap-2 mt-2 justify-between ">
             <div>
                 <div class="text-center border border-black dark:border-white px-2 py-1">
                     <p class="font-bold text-sm">Views</p>
-                    <p class="font-serif text-sm">{{ post.views || 0 }}</p>
+                    <p class="font-serif text-sm">{{ post.view_count || 0 }}</p>
                 </div>
             </div>
             <!-- <Link :href="route('posts.edit', post.slug)">

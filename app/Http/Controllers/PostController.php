@@ -13,7 +13,7 @@ class PostController extends Controller
     public function index ()
     {
         $user_id = auth()->user()->id;
-        $posts = Post::where('user_id', $user_id)->paginate(10)->latest();
+        $posts = Post::latest()->where('user_id', $user_id)->paginate(10);
 
         return Inertia::render('Dashboard', [
             'posts' => $posts,

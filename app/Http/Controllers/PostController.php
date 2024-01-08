@@ -26,6 +26,12 @@ class PostController extends Controller
         $post->comments;
         $post->images;
         $post->user;
+
+        if(!auth()->user() || auth()->user()->id != $post->user_id){
+            $post->view_count = $post->view_count + 1;
+            $post->save();
+        }
+
         return Inertia::render('Post', [
             'post' => $post,
             'canLogin' => Route::has('login'),

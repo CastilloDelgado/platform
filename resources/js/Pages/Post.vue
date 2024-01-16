@@ -29,7 +29,7 @@ const bodySplitted = computed(() => props.post.body.split('\n'))
                     <img :src="post.thumbnail_url" alt="Blog Post illustration"
                         class="border border-black dark:border-white">
 
-                    <p class="mt-4 text-left block text-gray-400 text-sm">
+                    <p class="mt-4 lg:mt-1 text-left block text-gray-400 text-sm">
                         Published <time>{{ formatDistance(new Date(post.created_at), new Date(), { addSuffix: true })
                         }}</time>
                     </p>

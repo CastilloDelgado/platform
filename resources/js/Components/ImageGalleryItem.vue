@@ -19,7 +19,7 @@ defineProps({
         <div
             class=" absolute top-0 left-0 right-0 bottom-0 grid place-content-center hover:grid hover:bg-black/60 transition text-transparent hover:text-white">
             <div class="text-center px-12">
-                <p class="font-bold text-xl">{{ image.post.title }}</p>
+                <p class="font-bold text-xl font-serif">{{ image.post.title }}</p>
                 <p class="text-xs mb-4">¡Haz click para ver más!</p>
                 <p class="capitalize text-xs">creado por</p>
                 <p class="font-md font-bold">{{ image.post.user.name }} </p>

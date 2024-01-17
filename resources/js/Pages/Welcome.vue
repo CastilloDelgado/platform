@@ -41,7 +41,7 @@ defineProps({
 
                 <SearchTools :categories="categories" :filters="filters" />
 
-                <PostsGrid :posts="posts" />
+                <PostsGrid :posts="posts" class="mb-4" />
 
 
                 <RandomImageGallery :images="randomImages" />

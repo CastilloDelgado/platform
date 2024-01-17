@@ -46,7 +46,8 @@ Route::get('/', function () {
         ->paginate(9)
         ->withQueryString();
 
-    $randomImages = PostImage::inRandomOrder()->limit(10)->get();
+    // $randomImages = PostImage::inRandomOrder()->limit(10)->get();
+    $randomImages = PostImage::latest()->limit(12)->with('post')->get();
 
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),

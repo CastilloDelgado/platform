@@ -12,10 +12,10 @@ defineProps({
 
 <template>
     <div class="text-white">
-        <p>This is the random image gallery</p>
-
-        <div class="grid grid-cols-3 gap-2">
-            <ImageGalleryItem v-for="image in images" :image="image" />
+        <div class="grid grid-cols-4 gap-2">
+            <ImageGalleryItem v-for="(image, index) in images" :image="image" :class="{
+                'col-span-2': [1, 3, 8].find((el) => el === index)
+            }" />
         </div>
     </div>
 </template>

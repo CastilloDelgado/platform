@@ -1,10 +1,9 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import WelcomeMessage from "@/Components/WelcomeMessage.vue"
 import PublicLayout from '@/Layouts/PublicLayout.vue';
 import SearchTools from "@/Components/SearchTools.vue"
-import LargePostBadge from '@/Components/LargePostBadge.vue';
-import PostBadge from '@/Components/PostBadge.vue';
+import RandomImageGallery from '@/Components/RandomImageGallery.vue';
 import PostsGrid from '@/Components/PostsGrid.vue';
 
 defineProps({
@@ -22,6 +21,10 @@ defineProps({
     },
     filters: {
         type: Object
+    },
+    randomImages: {
+        type: Array,
+        required: true
     }
 });
 </script>
@@ -38,7 +41,10 @@ defineProps({
 
                 <SearchTools :categories="categories" :filters="filters" />
 
-                <PostsGrid :posts="posts" />
+                <PostsGrid :posts="posts" class="mb-4" />
+
+
+                <RandomImageGallery :images="randomImages" />
             </div>
         </div>
     </PublicLayout>

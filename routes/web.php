@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Post;
+use App\Models\PostImage;
 use App\Models\User;
 use App\Models\Category;
 use App\Http\Controllers\PostController;
@@ -45,6 +46,8 @@ Route::get('/', function () {
         ->paginate(9)
         ->withQueryString();
 
+    $randomImages = PostImage::inRandomOrder()->limit(10)->get();
+
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -52,7 +55,8 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
         'posts' => $posts,
         'categories' => Category::all(),
-        'filters' => Request::only(['search'])
+        'filters' => Request::only(['search']),
+        'randomImages' => $randomImages,
     ]);
 })->name('welcome');
 

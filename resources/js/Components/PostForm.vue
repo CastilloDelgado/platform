@@ -6,6 +6,7 @@ import PrimaryButton from './PrimaryButton.vue';
 import TextInput from './TextInput.vue';
 import { useForm } from '@inertiajs/vue3';
 import ImageCarousel from './ImageCarousel.vue';
+import FilteredSelect from './FilteredSelect.vue';
 
 const props = defineProps({
     categories: {
@@ -125,8 +126,9 @@ onMounted(() => {
             <!-- Artist -->
             <div class="">
                 <InputLabel for="artist" value="Artista" />
-                <TextInput id="artist" v-model="form.artist_id" type="text" class="mt-1 block w-full" required autofocus
-                    placeholder="Este campo se autocompleta con el título" />
+
+                <FilteredSelect />
+
                 <div v-show="form.errors.artist_id" class="flex justify-end">
                     <InputError :message="form.errors.artist_id" />
                 </div>

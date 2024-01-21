@@ -35,7 +35,7 @@ const thumbnailUpdated = ref(false)
 const thumbnailPreview = ref('')
 
 const submitForm = () => {
-    if(props.editing){
+    if (props.editing) {
         form.patch('/posts/update')
     } else {
         form.post('/posts/store')
@@ -49,7 +49,7 @@ const resetForm = () => {
 
 const handleThumbnailChange = (event) => {
     form.thumbnail_url = event.target.files[0]
-    if(props.editing){
+    if (props.editing) {
         thumbnailUpdated.value = true
     }
 }
@@ -57,16 +57,16 @@ const handleThumbnailChange = (event) => {
 const handelImagesChange = (event) => form.images = event.target.files
 
 watch(
-    form, 
+    form,
     (newForm) => {
         console.log("executing")
-        if(props.editing){
-            if(thumbnailUpdated.value){
-                thumbnailPreview.value = newForm.thumbnail_url? URL.createObjectURL(newForm.thumbnail_url) : ''
+        if (props.editing) {
+            if (thumbnailUpdated.value) {
+                thumbnailPreview.value = newForm.thumbnail_url ? URL.createObjectURL(newForm.thumbnail_url) : ''
             } else {
                 thumbnailPreview.value = newForm.thumbnail_url
             }
-        } else {   
+        } else {
             thumbnailPreview.value = newForm.thumbnail_url ? URL.createObjectURL(newForm.thumbnail_url) : ''
         }
     },
@@ -76,7 +76,7 @@ watch(
 )
 
 const imagesPreview = computed(() => {
-    if(props.editing){
+    if (props.editing) {
         return props.post.images.map((image) => image.image_url)
     }
 
@@ -84,13 +84,13 @@ const imagesPreview = computed(() => {
 })
 
 onMounted(() => {
-    if(props.editing){
+    if (props.editing) {
         form.defaults({
-            title:  props.post.title,
-            slug:  props.post.slug,
-            excerpt:  props.post.excerpt,
-            body:  props.post.body,
-            category_id:  props.post.category_id,
+            title: props.post.title,
+            slug: props.post.slug,
+            excerpt: props.post.excerpt,
+            body: props.post.body,
+            category_id: props.post.category_id,
             thumbnail_url: props.post.thumbnail_url
         })
 
@@ -103,35 +103,32 @@ onMounted(() => {
 <template>
     <div class="pt-2 pb-12">
         <form @reset.prevent="resetForm" @submit.prevent="submitForm" class="max-w-lg mx-auto space-y-2">
-            <p class="font-serif font-bold text-xl text-center px-12">Completa el formulario para publicar un nuevo post!</p>
+            <p class="font-serif font-bold text-xl text-center px-12">Completa el formulario para publicar un nuevo post!
+            </p>
             <div class="">
                 <InputLabel for="title" value="Título" />
-                <TextInput  
-                    id="title"
-                    v-model="form.title"
-                    type="title"
-                    class="mt-1 block w-full"
-                    required
-                    autofocus
-                    placeholder="El titulo de tu post es lo más importante"
-                />
+                <TextInput id="title" v-model="form.title" type="title" class="mt-1 block w-full" required autofocus
+                    placeholder="El titulo de tu post es lo más importante" />
                 <div v-show="form.errors.title" class="flex justify-end">
                     <InputError :message="form.errors.title" />
                 </div>
             </div>
             <div class="">
                 <InputLabel for="slug" value="Slug" />
-                <TextInput  
-                    id="slug"
-                    v-model="form.slug"
-                    type="slug"
-                    class="mt-1 block w-full"
-                    required
-                    autofocus
-                    placeholder="Este campo se autocompleta con el título"
-                />
+                <TextInput id="slug" v-model="form.slug" type="slug" class="mt-1 block w-full" required autofocus
+                    placeholder="Este campo se autocompleta con el título" />
                 <div v-show="form.errors.slug" class="flex justify-end">
                     <InputError :message="form.errors.slug" />
+                </div>
+            </div>
+
+            <!-- Artist -->
+            <div class="">
+                <InputLabel for="artist" value="Artista" />
+                <TextInput id="artist" v-model="form.artist_id" type="text" class="mt-1 block w-full" required autofocus
+                    placeholder="Este campo se autocompleta con el título" />
+                <div v-show="form.errors.artist_id" class="flex justify-end">
+                    <InputError :message="form.errors.artist_id" />
                 </div>
             </div>
 
@@ -140,17 +137,11 @@ onMounted(() => {
                 <InputLabel for="thumbnail_url" value="Thumbnail" />
                 <div class="flex flex-row w-full">
                     <div>
-                        <input  
-                            id="thumbnail_url"
-                            @change="handleThumbnailChange"
-                            type="file"
-                            class="mt-1 block w-full"
-                            required
-                            autofocus
-                        />
+                        <input id="thumbnail_url" @change="handleThumbnailChange" type="file" class="mt-1 block w-full"
+                            required autofocus />
                     </div>
                     <div class="w-full justify-center">
-                        <img :src="thumbnailPreview" class="w-64"/>
+                        <img :src="thumbnailPreview" class="w-64" />
                     </div>
                 </div>
                 <div v-show="form.errors.thumbnail_url" class="flex justify-end">
@@ -163,18 +154,11 @@ onMounted(() => {
                 <InputLabel for="thumbnail_url" value="Galería de Imagenes" />
                 <div class="flex flex-col w-full">
                     <div class="mb-2">
-                        <input  
-                            id="thumbnail_url"
-                            @change="handelImagesChange"
-                            type="file"
-                            class="mt-1 block w-full"
-                            required
-                            autofocus
-                            multiple
-                        />
+                        <input id="thumbnail_url" @change="handelImagesChange" type="file" class="mt-1 block w-full"
+                            required autofocus multiple />
                     </div>
                     <div class="w-full justify-center">
-                       <ImageCarousel :images="imagesPreview" />
+                        <ImageCarousel :images="imagesPreview" />
                     </div>
                 </div>
                 <div v-show="form.errors.thumbnail_url" class="flex justify-end">
@@ -183,54 +167,39 @@ onMounted(() => {
             </div>
             <div class="">
                 <InputLabel for="excerpt" value="Resumen del post" />
-                <textarea 
-                    id="excerpt"
-                    v-model="form.excerpt"
-                    type="excerpt"
-                    class="mt-1 block w-full dark:bg-black border dark:border-white"
-                    required
-                    rows="4"
-                    autofocus
-                    placeholder="Aquí va un extracto de tu post, esto va debajo del thumbnail de tu post en la página principal"
-                />
+                <textarea id="excerpt" v-model="form.excerpt" type="excerpt"
+                    class="mt-1 block w-full dark:bg-black border dark:border-white" required rows="4" autofocus
+                    placeholder="Aquí va un extracto de tu post, esto va debajo del thumbnail de tu post en la página principal" />
                 <div v-show="form.errors.excerpt" class="flex justify-end">
                     <InputError :message="form.errors.excerpt" />
                 </div>
             </div>
             <div class="">
                 <InputLabel for="body" value="Cuerpo del post" />
-                <textarea 
-                    id="body"
-                    v-model="form.body"
-                    type="body"
-                    class="mt-1 block w-full dark:bg-black border dark:border-white"
-                    required
-                    rows="12"
-                    autofocus
-                    placeholder="Este es el espacio para que cuentes todo sobre tu experiencia!"
-                />
+                <textarea id="body" v-model="form.body" type="body"
+                    class="mt-1 block w-full dark:bg-black border dark:border-white" required rows="12" autofocus
+                    placeholder="Este es el espacio para que cuentes todo sobre tu experiencia!" />
                 <div v-show="form.errors.body" class="flex justify-end">
                     <InputError :message="form.errors.body" />
                 </div>
             </div>
             <div class="">
-                <InputLabel for="category_id" value="Categoria"/>
-                <select 
-                    v-model="form.category_id" 
-                    class="capitalize flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold"
-                    required    
-                >
+                <InputLabel for="category_id" value="Categoria" />
+                <select v-model="form.category_id"
+                    class="capitalize flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold" required>
                     <option class="capitalize" value="category" disabled selected>categoría</option>
-                    <option class="capitalize" v-for="category in categories" :value="category.id">{{ category.name }}</option>
+                    <option class="capitalize" v-for="category in categories" :value="category.id">{{ category.name }}
+                    </option>
                 </select>
                 <div v-show="form.errors.category_id" class="flex justify-end">
                     <InputError :message="form.errors.category_id" />
                 </div>
             </div>
             <div class="pt-6 flex gap-2">
-                <PrimaryButton v-if="editing" class="w-full" type="reset" @click="form.reset()">Cancelar cambios</PrimaryButton>
-                <PrimaryButton type="submit" class="w-full">{{ editing ? "Editar post" : "Publicar Post"}}</PrimaryButton>
+                <PrimaryButton v-if="editing" class="w-full" type="reset" @click="form.reset()">Cancelar cambios
+                </PrimaryButton>
+                <PrimaryButton type="submit" class="w-full">{{ editing ? "Editar post" : "Publicar Post" }}</PrimaryButton>
             </div>
         </form>
-    </div> 
+    </div>
 </template>

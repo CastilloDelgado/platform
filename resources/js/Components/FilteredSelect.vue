@@ -1,3 +1,49 @@
+  
+<script setup>
+import { ref, computed } from 'vue'
+import {
+    Combobox,
+    ComboboxInput,
+    ComboboxButton,
+    ComboboxOptions,
+    ComboboxOption,
+    TransitionRoot,
+} from '@headlessui/vue'
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
+
+// const people = [
+//     { id: 1, name: 'Wade Cooper' },
+//     { id: 2, name: 'Arlene Mccoy' },
+//     { id: 3, name: 'Devon Webb' },
+//     { id: 4, name: 'Tom Cook' },
+//     { id: 5, name: 'Tanya Fox' },
+//     { id: 6, name: 'Hellen Schmidt' },
+// ]
+
+const props = defineProps({
+    artists: {
+        type: Array,
+        required: true
+    }
+})
+
+const people = ref(props.artists)
+
+let selected = ref(people[0])
+let query = ref('')
+
+let filteredPeople = computed(() =>
+    query.value === ''
+        ? people
+        : people.filter((person) =>
+            person.name
+                .toLowerCase()
+                .replace(/\s+/g, '')
+                .includes(query.value.toLowerCase().replace(/\s+/g, ''))
+        )
+)
+</script>
+
 <template>
     <div class="fixed top-16 w-72">
         <Combobox v-model="selected">
@@ -40,40 +86,3 @@
         </Combobox>
     </div>
 </template>
-  
-<script setup>
-import { ref, computed } from 'vue'
-import {
-    Combobox,
-    ComboboxInput,
-    ComboboxButton,
-    ComboboxOptions,
-    ComboboxOption,
-    TransitionRoot,
-} from '@headlessui/vue'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
-
-const people = [
-    { id: 1, name: 'Wade Cooper' },
-    { id: 2, name: 'Arlene Mccoy' },
-    { id: 3, name: 'Devon Webb' },
-    { id: 4, name: 'Tom Cook' },
-    { id: 5, name: 'Tanya Fox' },
-    { id: 6, name: 'Hellen Schmidt' },
-]
-
-let selected = ref(people[0])
-let query = ref('')
-
-let filteredPeople = computed(() =>
-    query.value === ''
-        ? people
-        : people.filter((person) =>
-            person.name
-                .toLowerCase()
-                .replace(/\s+/g, '')
-                .includes(query.value.toLowerCase().replace(/\s+/g, ''))
-        )
-)
-</script>
-  

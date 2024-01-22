@@ -19,6 +19,9 @@ const props = defineProps({
     },
     post: {
         type: Object,
+    },
+    artists: {
+        type: Array
     }
 });
 

@@ -7,6 +7,10 @@ defineProps({
     categories: {
         type: Array,
         required: true
+    },
+    artists: {
+        type: Array,
+        required: true
     }
 })
 </script>
@@ -23,7 +27,7 @@ defineProps({
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="dark:bg-black dark:border-white  overflow-hidden dark:text-white px-6 py-4">
-                <PostForm :categories="categories" />
+                <PostForm :categories="categories" :artists="artists" />
             </div>
         </div>
     </AppLayout>

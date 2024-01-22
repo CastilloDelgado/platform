@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Artist;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,7 @@ class PostController extends Controller
     {
         return Inertia::render('CreatePost', [
             'categories' => Category::all(),
+            'artists' => Artist::all()
         ]);
     }
 

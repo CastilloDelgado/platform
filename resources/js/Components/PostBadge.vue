@@ -15,9 +15,9 @@ defineProps({
 
 <template>
     <Link :href="route('posts.show', post.slug)" as="article"
-        class="border border-black dark:border-white flex flex-col cursor-pointer">
+        class="border border-black dark:border-white flex flex-col cursor-pointer hover:saturate-[1.25]">
     <div>
-        <img :src="post.thumbnail_url" alt="Blog Post illustration" class="h-64 w-full object-cover">
+        <img :src="post.thumbnail_url" alt="Blog Post illustration" class="h-64 w-full object-cover ">
     </div>
 
     <div class="p-6 bg-white dark:bg-black text-black dark:text-white flex flex-col justify-between h-full">

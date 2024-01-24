@@ -34,6 +34,11 @@ class Post extends Model
         return $this->hasMany(PostImage::class, 'post_id');
     }
 
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class);
+    }
+
     public function thumbnailUrl(): Attribute
     {
         return Attribute::make(

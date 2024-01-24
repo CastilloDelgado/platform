@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ use App\Http\Controllers\PostCommentController;
 |
 */
 
+Route::get('/', [PostController::class, 'welcome'])->name('welcome');
 Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 Route::get('posts/{post:slug}/edit', [PostController::class,'edit'])->name('posts.edit');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Artist;
 use App\Models\Category;
@@ -10,7 +11,7 @@ use Illuminate\Foundation\Application;
 use App\Models\PostImage;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class PostController extends Controller
 {
@@ -19,7 +20,7 @@ class PostController extends Controller
     {
         $posts =  Post::query()
             ->latest()
-            ->when(Request::input('search'), function($query, $search){
+            ->when(FacadesRequest::input('search'), function($query, $search){
                 $query
                     ->where('title', 'like', "%{$search}%")
                     ->orWhere('body', 'like', "%{$search}%");
@@ -97,6 +98,9 @@ class PostController extends Controller
             'category_id' => ['required','integer'],
             'thumbnail_url' => ['required', 'image']
         ]);   
+
+        $validated['artist_id'] = $request['artist']['id'];
+        unset($validated['artist']);
 
         $mainImagePath = $request->file('thumbnail_url')->store('thumbnails'); 
 

@@ -21,7 +21,9 @@ const props = defineProps({
         type: Object,
     },
     artists: {
-        type: Array
+        type: Array,
+        required: true,
+        default: []
     }
 });
 
@@ -32,8 +34,15 @@ const form = useForm({
     body: "",
     category_id: "",
     thumbnail_url: "",
-    images: []
+    images: [],
+    artist: null
 })
+
+const selectArtist = (selectedArtist) => {
+    if (selectedArtist) {
+        form.artist = selectedArtist
+    }
+}
 
 const thumbnailUpdated = ref(false)
 const thumbnailPreview = ref('')
@@ -130,7 +139,7 @@ onMounted(() => {
             <div class="">
                 <InputLabel for="artist" value="Artista" />
 
-                <FilteredSelect />
+                <FilteredSelect :artist-list="artists" @select-artist="selectArtist" />
 
                 <div v-show="form.errors.artist_id" class="flex justify-end">
                     <InputError :message="form.errors.artist_id" />

@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AuthController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Post;
+use App\Models\PostImage;
 use App\Models\User;
 use App\Models\Category;
 use App\Http\Controllers\PostController;
@@ -33,6 +36,31 @@ Route::delete('posts/post-comment/{postComment:id}', [PostCommentController::cla
 Route::get('/auth/redirect', [AuthController::class,'redirect'])->name('auth.redirect');
 Route::get('/auth/callback', [AuthController::class,'callback'])->name('auth.callback');
 Route::get('/auth/logout', [AuthController::class,'logout'])->name('auth.logout');
+
+Route::get('/', function () {
+    $posts =  Post::query()
+        ->latest()
+        ->when(Request::input('search'), function($query, $search){
+            $query
+                ->where('title', 'like', "%{$search}%")
+                ->orWhere('body', 'like', "%{$search}%");
+        })
+        ->paginate(9)
+        ->withQueryString();
+
+    $randomImages = PostImage::inRandomOrder()->limit(9)->with('post')->get();
+
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+        'posts' => $posts,
+        'categories' => Category::all(),
+        'filters' => Request::only(['search']),
+        'randomImages' => $randomImages,
+    ]);
+})->name('welcome');
 
 Route::get('posts', function(){
     return Inertia::render('Posts', [

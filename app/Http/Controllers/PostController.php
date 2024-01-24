@@ -2,15 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Artist;
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Foundation\Application;
+use App\Models\PostImage;
+
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
 
 class PostController extends Controller
 {
+
+    public function welcome()
+    {
+        $posts =  Post::query()
+            ->latest()
+            ->when(Request::input('search'), function($query, $search){
+                $query
+                    ->where('title', 'like', "%{$search}%")
+                    ->orWhere('body', 'like', "%{$search}%");
+            })
+            ->paginate(9)
+            ->withQueryString();
+    
+        $randomImages = PostImage::inRandomOrder()->limit(9)->with('post')->get();
+    
+        return Inertia::render('Welcome', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+            'posts' => $posts,
+            'categories' => Category::all(),
+            'filters' => Request::only(['search']),
+            'randomImages' => $randomImages,
+        ]);
+    }
+
+
     public function index ()
     {
         $user_id = auth()->user()->id;

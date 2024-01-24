@@ -1,52 +1,18 @@
   
 <script setup>
-import { ref, computed } from 'vue'
-import {
-    Combobox,
-    ComboboxInput,
-    ComboboxButton,
-    ComboboxOptions,
-    ComboboxOption,
-    TransitionRoot,
-} from '@headlessui/vue'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
+import { router } from '@inertiajs/vue3';
+import { onMounted, ref } from 'vue'
+const artist = ref([])
 
-// const people = [
-//     { id: 1, name: 'Wade Cooper' },
-//     { id: 2, name: 'Arlene Mccoy' },
-//     { id: 3, name: 'Devon Webb' },
-//     { id: 4, name: 'Tom Cook' },
-//     { id: 5, name: 'Tanya Fox' },
-//     { id: 6, name: 'Hellen Schmidt' },
-// ]
 
-const props = defineProps({
-    artists: {
-        type: Array,
-        required: true
-    }
+onMounted(() => {
+
 })
-
-const people = ref(props.artists)
-
-let selected = ref(people[0])
-let query = ref('')
-
-let filteredPeople = computed(() =>
-    query.value === ''
-        ? people
-        : people.filter((person) =>
-            person.name
-                .toLowerCase()
-                .replace(/\s+/g, '')
-                .includes(query.value.toLowerCase().replace(/\s+/g, ''))
-        )
-)
 </script>
 
 <template>
     <div class="fixed top-16 w-72">
-        <Combobox v-model="selected">
+        <!-- <Combobox v-model="selected">
             <div class="relative mt-1">
                 <div
                     class="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
@@ -83,6 +49,6 @@ let filteredPeople = computed(() =>
                     </ComboboxOptions>
                 </TransitionRoot>
             </div>
-        </Combobox>
+        </Combobox> -->
     </div>
 </template>

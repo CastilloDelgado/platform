@@ -34,6 +34,7 @@ const bodySplitted = computed(() => props.post.body.split('\n'))
                         }}</time>
                     </p>
 
+                    <Link :href="route('profile.show', post.user)">
                     <div class="flex justify-start text-sm mt-4">
                         <img :src="post.user.profile_photo_url" alt="Lary avatar"
                             class="w-24 h-24 object-cover border dark:border-white border-black">
@@ -43,6 +44,7 @@ const bodySplitted = computed(() => props.post.body.split('\n'))
                                 Date(), { addSuffix: true }) }}</h6>
                         </div>
                     </div>
+                    </Link>
                 </div>
 
                 <div class="col-span-8">

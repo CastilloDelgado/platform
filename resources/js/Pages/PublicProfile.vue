@@ -20,7 +20,7 @@ defineProps({
 <template>
     <PublicLayout>
 
-        <Head :title="user.username" />
+        <Head :title="user.name" />
 
         <div class="max-w-6xl mx-auto py-12 flex flex-row relative">
             <div class="w-1/4 text-black dark:text-white sticky top-0">

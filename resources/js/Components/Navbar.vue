@@ -60,6 +60,8 @@ const logout = () => router.get('/auth/logout')
                         <div v-if="canLogin" class="flex space-x-4">
                             <NavbarLink :href="route('welcome')" title="Inicio" :active="true" />
                             <NavbarLink v-if="$page.props.auth.user" :href="route('dashboard')" title="Dashboard" />
+                            <NavbarLink v-if="$page.props.auth.user" :href="route('profile.show', $page.props.auth.user)"
+                                title="Mi perfil" />
                             <template v-else>
                                 <NavbarLink :href="route('login')" title="Iniciar Sesión" />
                                 <NavbarLink v-if="canRegister" :href="route('register')" title="Registrate" />
@@ -87,9 +89,9 @@ const logout = () => router.get('/auth/logout')
                             class="absolute right-[-4px] z-10 mt-2 w-48 origin-top-right border border-black bg-white dark:border-white dark:bg-black py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                             <!-- Active: "bg-gray-100", Not Active: "" -->
-                            <DropdownLink :href="route('profile.show')">
+                            <!-- <DropdownLink v-if="$page.props.auth.user" :href="route('profile.show', $page.props.auth.user)">
                                 Mi perfil
-                            </DropdownLink>
+                            </DropdownLink> -->
 
                             <button @click="logout"
                                 class="block w-full px-4 py-2 text-start text-sm leading-5 text-red-500 hover:bg-red-500 hover:text-black  dark:hover:bg-red-500 dark:hover:text-white ">
@@ -111,6 +113,8 @@ const logout = () => router.get('/auth/logout')
                 <div v-if="canLogin" class="flex space-x-4">
                     <NavbarLink :href="route('welcome')" title="Inicio" :active="true" />
                     <NavbarLink v-if="$page.props.auth.user" :href="route('dashboard')" title="Dashboard" />
+                    <NavbarLink v-if="$page.props.auth.user" :href="route('profile.show', $page.props.auth.user)"
+                        title="Mi perfil" />
                     <template v-else>
                         <NavbarLink :href="route('login')" title="Iniciar Sesión" />
                         <NavbarLink v-if="canRegister" :href="route('register')" title="Registrate" />

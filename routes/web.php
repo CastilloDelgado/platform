@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PublicProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,6 +31,9 @@ Route::get('posts/{post:slug}/edit', [PostController::class,'edit'])->name('post
 Route::post('posts/store', [PostController::class, 'store'])->name('posts.store');
 Route::delete('posts/{post:id}', [PostController::class, 'delete'])->name('posts.delete');
 Route::post('posts/{post:id}/comments', [PostCommentController::class, 'store'])->name('post.comment.store');
+
+
+Route::get('/profile/{user:id}', [PublicProfileController::class, 'show'])->name('profile.show');
 
 Route::delete('posts/post-comment/{postComment:id}', [PostCommentController::class,'delete'])->name('post-comments.delete');
 

@@ -22,15 +22,18 @@ defineProps({
 
         <Head :title="user.name" />
 
-        <div class="max-w-6xl mx-auto py-12 flex flex-row relative  h-[90vh] overflow-y-hidden">
-            <div class="w-1/4 text-black dark:text-white sticky top-0">
-                <img :src="user.profile_photo_url" class="w-full mb-4 border border-black dark:border-white" />
-                <p class="text-2xl font-bold font-serif">{{ user.username }}</p>
-                <p class="text-lg">{{ user.name }}</p>
-                <p class="dark:text-white/50">Joined {{ formatDistance(new Date(user.created_at), new
-                    Date(), { addSuffix: true }) }}</p>
+        <div class="max-w-6xl mx-auto py-12 flex md:flex-row relative  md:h-[90vh] overflow-y-hidden flex-col px-6">
+            <div
+                class="w-full md:w-1/4 text-black dark:text-white sticky top-0 grid place-content-center md:place-content-start">
+                <img :src="user.profile_photo_url"
+                    class="w-64 h-64 object-cover md:w-full mb-4 border border-black dark:border-white md:justify-start justify-center" />
+                <p class="text-center md:text-start text-2xl font-bold font-serif">{{ user.username }}</p>
+                <p class="text-center md:text-start text-lg">{{ user.name }}</p>
+                <p class="text-center md:text-start dark:text-white/50">Joined {{ formatDistance(new Date(user.created_at),
+                    new
+                        Date(), { addSuffix: true }) }}</p>
             </div>
-            <div class="w-3/4 text-black dark:text-white px-8 overflow-auto no-scrollbar">
+            <div class="w-full md:w-3/4 text-black dark:text-white px-8 md:overflow-auto no-scrollbar">
                 <p class="text-3xl font-sans font-bold mb-4">Posts</p>
                 <div class="flex flex-col space-y-4">
                     <Link as="div" :href="route('posts.show', post)" v-for="post in posts"

@@ -22,7 +22,7 @@ defineProps({
 
         <Head :title="user.name" />
 
-        <div class="max-w-6xl mx-auto py-12 flex flex-row relative">
+        <div class="max-w-6xl mx-auto py-12 flex flex-row relative  h-[90vh] overflow-y-hidden">
             <div class="w-1/4 text-black dark:text-white sticky top-0">
                 <img :src="user.profile_photo_url" class="w-full mb-4 border border-black dark:border-white" />
                 <p class="text-2xl font-bold font-serif">{{ user.username }}</p>
@@ -30,7 +30,7 @@ defineProps({
                 <p class="dark:text-white/50">Joined {{ formatDistance(new Date(user.created_at), new
                     Date(), { addSuffix: true }) }}</p>
             </div>
-            <div class="w-3/4 text-black dark:text-white px-8 overflow-auto">
+            <div class="w-3/4 text-black dark:text-white px-8 overflow-auto no-scrollbar">
                 <p class="text-3xl font-sans font-bold mb-4">Posts</p>
                 <div class="flex flex-col space-y-4">
                     <Link as="div" :href="route('posts.show', post)" v-for="post in posts"
@@ -64,3 +64,18 @@ defineProps({
         </div>
     </PublicLayout>
 </template>
+
+<style scoped>
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+</style>

@@ -10,7 +10,7 @@ use Inertia\Inertia;
 class PublicProfileController extends Controller
 {
     public function show(User $user){
-        $posts = Post::where('user_id', $user->id)->get();
+        $posts = Post::where('user_id', $user->id)->latest()->get();
         return Inertia::render('PublicProfile', [
             'user' => $user,
             'posts' => $posts

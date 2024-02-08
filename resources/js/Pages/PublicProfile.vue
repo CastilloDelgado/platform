@@ -34,10 +34,12 @@ defineProps({
                         Date(), { addSuffix: true }) }}</p>
             </div>
             <div class="w-full md:w-3/4 text-black dark:text-white px-8 md:overflow-auto no-scrollbar">
-                <p class="text-3xl font-sans font-bold mb-4">Posts</p>
+                <p
+                    class="text-3xl font-sans font-bold mb-4 border-b border-black dark:border-white sticky top-0 bg-white dark:bg-black pb-2">
+                    Posts</p>
                 <div class="flex flex-col space-y-4">
                     <Link as="div" :href="route('posts.show', post)" v-for="post in posts"
-                        class="flex flex-row border border-white">
+                        class="flex flex-row border border-black dark:border-white">
                     <div class="w-1/4">
                         <img :src="post.thumbnail_url" alt="" class="w-full h-64 object-cover">
                     </div>

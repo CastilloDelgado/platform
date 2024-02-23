@@ -26,6 +26,14 @@ const bodySplitted = computed(() => props.post.body.split('\n'))
         <main class="max-w-7xl mx-auto space-y-6 text-black dark:text-white pt-12 px-4 md:px-0 pb-12">
             <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
                 <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
+                    <div class="block md:hidden">
+                        <h1 class="font-bold text-3xl mb-1 lg:text-4xl font-serif">
+                            {{ post.title }}
+                        </h1>
+                        <p class="mb-6">
+                            Created {{ formatDistance(new Date(post.created_at), new Date(), { addSuffix: true }) }}
+                        </p>
+                    </div>
                     <img :src="post.thumbnail_url" alt="Blog Post illustration"
                         class="border border-black dark:border-white">
 
@@ -71,12 +79,14 @@ const bodySplitted = computed(() => props.post.body.split('\n'))
                         </div>
                     </div>
 
-                    <h1 class="font-bold text-3xl mb-1 lg:text-4xl font-serif">
-                        {{ post.title }}
-                    </h1>
-                    <p class="mb-6">
-                        Created {{ formatDistance(new Date(post.created_at), new Date(), { addSuffix: true }) }}
-                    </p>
+                    <div class="hidden md:block">
+                        <h1 class="font-bold text-3xl mb-1 lg:text-4xl font-serif">
+                            {{ post.title }}
+                        </h1>
+                        <p class="mb-6">
+                            Created {{ formatDistance(new Date(post.created_at), new Date(), { addSuffix: true }) }}
+                        </p>
+                    </div>
 
                     <div class="space-y-4 lg:text-lg leading-loose">
                         <p class="text-2xl text-justify">{{ post.excerpt }}</p>

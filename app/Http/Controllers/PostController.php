@@ -28,7 +28,7 @@ class PostController extends Controller
             ->paginate(9)
             ->withQueryString();
     
-        $randomImages = PostImage::inRandomOrder()->limit(9)->with('post')->get();
+        $randomImages = PostImage::inRandomOrder()->limit(18)->with('post')->get();
     
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
